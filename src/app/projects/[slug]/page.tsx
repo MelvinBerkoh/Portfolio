@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -139,6 +140,49 @@ export default async function ProjectPage({
             <BulletList items={project.nextSteps} />
           </SectionCard>
         </section>
+        {project.screenshots && project.screenshots.length > 0 && (
+  <section className="mt-10">
+    <div className="mb-5 space-y-2">
+      <h2 className="text-2xl font-bold tracking-tight">Screenshots</h2>
+      <p className="text-muted-foreground">
+        A closer look at the interface and functionality behind this project.
+      </p>
+    </div>
+
+    <div className="grid gap-6 md:grid-cols-2">
+      {project.screenshots.map((screenshot) => (
+        <Card key={screenshot.src} className="overflow-hidden">
+          <div className="relative aspect-video bg-muted">
+            <Image
+              src={screenshot.src}
+              alt={screenshot.alt}
+              fill
+              className="object-cover"
+            />
+          </div>
+
+          <CardContent className="p-4">
+            <p className="text-sm text-muted-foreground">
+              {screenshot.caption}
+            </p>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  </section>
+)}
+
+{project.links && project.links.length > 0 && (
+  <section className="mt-8 flex flex-wrap gap-3">
+    {project.links.map((link) => (
+      <Button key={link.href} asChild variant="outline">
+        <Link href={link.href} target="_blank">
+          {link.label}
+        </Link>
+      </Button>
+    ))}
+  </section>
+)}
 
         <section className="mt-10 rounded-2xl border bg-muted/40 p-8">
           <div className="max-w-3xl space-y-3">

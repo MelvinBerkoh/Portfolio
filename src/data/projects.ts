@@ -13,9 +13,17 @@ export type Project = {
   challenges: string[];
   results: string[];
   nextSteps: string[];
+  screenshots?: {
+    src: string;
+    alt: string;
+    caption: string;
+  }[];
+  links?: {
+    label: string;
+    href: string;
+  }[];
   featured?: boolean;
 };
-
 export const projects: Project[] = [
   {
     slug: "policyscope",
@@ -24,7 +32,7 @@ export const projects: Project[] = [
     summary:
       "A Chrome extension that helps users understand long Terms of Service and privacy policy pages by detecting risky clauses, highlighting them, and generating plain-English AI summaries.",
     impact:
-      "Capstone senior project that placed 3rd overall and earned certificates.",
+      "Senior capstone project that placed 3rd overall. Built and demonstrated as a locally run Chrome extension prototype.",
     tech: [
       "Chrome MV3",
       "JavaScript",
@@ -67,17 +75,32 @@ export const projects: Project[] = [
       "Debugging Chrome extension message passing between content scripts, background scripts, popup UI, and backend API.",
     ],
     results: [
-      "Built a working Chrome extension that detects and highlights risky policy clauses on real webpages.",
-      "Integrated AI-generated summaries to explain policy language in plain English.",
-      "Presented the project as a senior capstone and placed 3rd overall.",
-      "Created a practical tool that shows frontend, backend, browser API, and AI integration skills.",
+      "Built a working locally run Chrome extension prototype for detecting and organizing policy clauses.",
+  "Created a popup interface that displayed detected categories and clause counts.",
+  "Integrated AI-generated summaries to explain policy language in plain English.",
+  "Presented the project as a senior capstone and placed 3rd overall.",
+  "Demonstrated frontend, browser extension, backend API, and AI integration skills.",
     ],
     nextSteps: [
+      "Prepare the extension for Chrome Web Store deployment.",
       "Improve detection accuracy with a stronger classification model instead of only regex-based matching.",
-      "Add user-controlled highlight colors and category toggles.",
       "Add persistent settings so users can customize how the extension behaves.",
-      "Create a polished public demo video showing the extension on real policy pages.",
+      "Create a polished public demo video showing the extension running locally on real policy pages.",
     ],
+    screenshots: [
+  {
+    src: "/projects/policyscope/policyscope-overview.png",
+    alt: "PolicyScope capstone overview showing project scope, product description, technologies, and popup interface",
+    caption:
+      "Capstone overview showing the PolicyScope goal, prototype scope, technologies, and popup UI for detected policy categories.",
+  },
+],
+links: [
+  {
+    label: "View GitHub Profile",
+    href: "https://github.com/MelvinBerkoh",
+  },
+],
     featured: true,
   },
   {
@@ -191,6 +214,29 @@ export const projects: Project[] = [
       "Add SHAP or feature-importance analysis.",
       "Turn the notebook into a cleaner GitHub project with a full README.",
     ],
+    screenshots: [
+  {
+    src: "/projects/policyscope/popup.png",
+    alt: "PolicyScope popup interface showing detected policy categories",
+    caption: "Popup interface showing detected policy clause categories and summaries.",
+  },
+  {
+    src: "/projects/policyscope/highlighted-page.png",
+    alt: "PolicyScope highlighting risky policy clauses on a webpage",
+    caption: "Live webpage highlighting for risky Terms of Service clauses.",
+  },
+  {
+    src: "/projects/policyscope/summary-view.png",
+    alt: "PolicyScope AI-generated summary view",
+    caption: "AI-generated plain-English explanation for selected policy text.",
+  },
+],
+links: [
+  {
+    label: "View GitHub",
+    href: "https://github.com/MelvinBerkoh",
+  },
+],
     featured: true,
   },
 ];
