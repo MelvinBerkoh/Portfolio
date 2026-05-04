@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { projects } from "@/data/projects";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -10,6 +11,36 @@ export function generateStaticParams() {
   return projects.map((project) => ({
     slug: project.slug,
   }));
+}
+
+function SectionCard({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <Card>
+      <CardContent className="space-y-4 p-6">
+        <h2 className="text-xl font-semibold tracking-tight">{title}</h2>
+        {children}
+      </CardContent>
+    </Card>
+  );
+}
+
+function BulletList({ items }: { items: string[] }) {
+  return (
+    <ul className="space-y-3 text-muted-foreground">
+      {items.map((item) => (
+        <li key={item} className="leading-7">
+          <span className="mr-2 text-foreground">•</span>
+          {item}
+        </li>
+      ))}
+    </ul>
+  );
 }
 
 export default async function ProjectPage({
@@ -26,83 +57,101 @@ export default async function ProjectPage({
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-6">
-        <Link href="/" className="text-sm font-medium text-muted-foreground hover:text-foreground">
+      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
+        <Link
+          href="/"
+          className="text-sm font-medium text-muted-foreground transition hover:text-foreground"
+        >
           ← Back Home
         </Link>
 
-        <Button asChild variant="outline">
-          <Link href="/#contact">Contact</Link>
-        </Button>
+        <div className="flex items-center gap-3">
+          <Button asChild variant="outline">
+            <Link href="/#contact">Contact</Link>
+          </Button>
+          <ThemeToggle />
+        </div>
       </nav>
 
-      <section className="mx-auto max-w-5xl px-6 py-16">
-        <div className="mb-10 space-y-5">
+      <section className="mx-auto max-w-6xl px-6 py-14">
+        <div className="mb-12 max-w-4xl space-y-5">
           <Badge variant="secondary">{project.category}</Badge>
 
-          <h1 className="max-w-3xl text-4xl font-bold tracking-tight sm:text-5xl">
+          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
             {project.title}
           </h1>
 
-          <p className="max-w-3xl text-lg leading-8 text-muted-foreground">
+          <p className="text-lg leading-8 text-muted-foreground">
             {project.summary}
           </p>
 
-          <p className="font-medium">{project.impact}</p>
+          <p className="text-base font-medium">{project.impact}</p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-[0.7fr_1.3fr]">
-          <Card>
-            <CardContent className="space-y-5 p-6">
-              <div>
-                <h2 className="mb-3 text-lg font-semibold">Tech Stack</h2>
-                <div className="flex flex-wrap gap-2">
-                  {project.tech.map((item) => (
-                    <Badge key={item} variant="outline">
-                      {item}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+        <div className="grid gap-6 lg:grid-cols-[0.75fr_1.25fr]">
+          <SectionCard title="Tech Stack">
+            <div className="flex flex-wrap gap-2">
+              {project.tech.map((item) => (
+                <Badge key={item} variant="outline">
+                  {item}
+                </Badge>
+              ))}
+            </div>
+          </SectionCard>
 
-          <Card>
-            <CardContent className="space-y-5 p-6">
-              <div>
-                <h2 className="mb-3 text-lg font-semibold">Project Highlights</h2>
-                <ul className="space-y-3 text-muted-foreground">
-                  {project.highlights.map((highlight) => (
-                    <li key={highlight} className="leading-7">
-                      • {highlight}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </CardContent>
-          </Card>
+          <SectionCard title="Project Highlights">
+            <BulletList items={project.highlights} />
+          </SectionCard>
         </div>
 
-        <section className="mt-10 grid gap-6 md:grid-cols-2">
-          <Card>
-            <CardContent className="space-y-3 p-6">
-              <h2 className="text-xl font-semibold">Problem</h2>
-              <p className="leading-7 text-muted-foreground">
-                This project was built to solve a practical software problem, not just to demonstrate syntax.
-                The goal was to create something usable, structured, and clear enough for real users or team members.
-              </p>
-            </CardContent>
-          </Card>
+        <section className="mt-8 grid gap-6 md:grid-cols-2">
+          <SectionCard title="Problem">
+            <p className="leading-7 text-muted-foreground">{project.problem}</p>
+          </SectionCard>
 
-          <Card>
-            <CardContent className="space-y-3 p-6">
-              <h2 className="text-xl font-semibold">What I Learned</h2>
-              <p className="leading-7 text-muted-foreground">
-                I strengthened my ability to work across frontend logic, project architecture, debugging,
-                user experience decisions, and technical communication.
-              </p>
-            </CardContent>
-          </Card>
+          <SectionCard title="Solution">
+            <p className="leading-7 text-muted-foreground">{project.solution}</p>
+          </SectionCard>
+        </section>
+
+        <section className="mt-8">
+          <SectionCard title="My Role">
+            <p className="leading-7 text-muted-foreground">{project.role}</p>
+          </SectionCard>
+        </section>
+
+        <section className="mt-8 grid gap-6 lg:grid-cols-2">
+          <SectionCard title="Technical Architecture">
+            <BulletList items={project.architecture} />
+          </SectionCard>
+
+          <SectionCard title="Challenges">
+            <BulletList items={project.challenges} />
+          </SectionCard>
+        </section>
+
+        <section className="mt-8 grid gap-6 lg:grid-cols-2">
+          <SectionCard title="Results">
+            <BulletList items={project.results} />
+          </SectionCard>
+
+          <SectionCard title="Next Improvements">
+            <BulletList items={project.nextSteps} />
+          </SectionCard>
+        </section>
+
+        <section className="mt-10 rounded-2xl border bg-muted/40 p-8">
+          <div className="max-w-3xl space-y-3">
+            <h2 className="text-2xl font-bold tracking-tight">
+              Why this project matters
+            </h2>
+            <p className="leading-7 text-muted-foreground">
+              This project shows more than just coding syntax. It shows problem
+              solving, architecture decisions, debugging, user experience
+              thinking, and the ability to connect multiple parts of a software
+              system into something usable.
+            </p>
+          </div>
         </section>
       </section>
     </main>
