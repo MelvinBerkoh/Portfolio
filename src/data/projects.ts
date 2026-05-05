@@ -145,94 +145,148 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    slug: "coveytown-escape-room",
-    title: "Covey.Town Escape Room",
-    category: "Multiplayer Game Feature",
-    summary:
-      "A multiplayer escape room feature built into Covey.Town where 2–4 players join a lobby, solve puzzles, complete trivia, and interact with game areas.",
-    impact:
-      "Built inside a large existing TypeScript codebase with frontend and backend game-state logic.",
-    tech: [
-      "React",
-      "TypeScript",
-      "Phaser",
-      "Tiled",
-      "Chakra UI",
-      "Game Controllers",
-    ],
-    highlights: [
-      "Worked inside an existing team codebase instead of starting from scratch.",
-      "Built multiplayer game flow for a 2–4 player escape room.",
-      "Integrated puzzle interactions, trivia, countdown behavior, and scoring concepts.",
-      "Connected frontend UI state with game-area controller logic.",
-    ],
-    overview:
-      "The Covey.Town Escape Room project added a collaborative game experience to an existing virtual environment. The goal was to create a multiplayer activity where players could join a lobby, enter an escape room, solve puzzles, complete trivia, and work together under a timer. This project gave me experience working inside a larger codebase with existing patterns, controllers, and frontend/backend responsibilities.",
-    techStack: ["React", "TypeScript", "JavaScript", "HTML", "CSS"],
-    libraries: [
-      {
-        name: "Phaser",
-        description:
-          "Used as the game framework for interactive game areas and player-facing puzzle interactions.",
-      },
-      {
-        name: "Tiled",
-        description:
-          "Used as the map editor for designing interactive spaces and placing game elements.",
-      },
-      {
-        name: "Chakra UI",
-        description:
-          "Used for frontend layout and reusable UI components inside the Covey.Town interface.",
-      },
-    ],
-    whatIBuilt: [
-      "Worked on the escape room game-area flow and player interaction logic.",
-      "Helped build lobby behavior for players joining and preparing to start the game.",
-      "Integrated trivia and Caesar cipher puzzle interactions into the escape room experience.",
-      "Worked on timer/countdown behavior to create urgency during gameplay.",
-      "Connected UI behavior with game-area controller state in the existing architecture.",
-    ],
-    engineeringDecisions: [
-      "Followed the existing Covey.Town controller pattern instead of inventing a separate game structure.",
-      "Kept lobby logic separate from active gameplay logic so player state was easier to reason about.",
-      "Used difficulty-based trivia scoring to make the game feel more rewarding.",
-      "Designed puzzle interactions to fit into existing interactable game areas.",
-      "Focused on incremental integration because the project lived inside a larger shared codebase.",
-    ],
-    challenges: [
-      "Understanding the existing Covey.Town architecture before adding new features.",
-      "Keeping multiplayer game state consistent across multiple players.",
-      "Avoiding UI freezes when timers expired or players answered questions incorrectly.",
-      "Making puzzle logic fit cleanly into an existing controller-based system.",
-      "Coordinating frontend and backend changes across a team project.",
-    ],
-    results: [
-      "Built a working multiplayer escape room concept inside Covey.Town.",
-      "Added multiple puzzle types and game interactions.",
-      "Improved my understanding of TypeScript, game-state architecture, and team-based development.",
-      "Gained experience reading and modifying a large existing codebase.",
-    ],
-    limitations: [
-      "The project was part of a course/team codebase, so public repository access may be limited.",
-      "A public live deployment is not currently available.",
-      "A short demo video would make this project easier for recruiters to evaluate.",
-    ],
-    nextSteps: [
-      "Add a public demo video showing the full gameplay flow.",
-      "Improve onboarding instructions for new players.",
-      "Add more randomized puzzles for replayability.",
-      "Write tests for game-state transitions and timer behavior.",
-    ],
-    links: [
-      {
-        label: "GitHub Profile",
-        href: "https://github.com/MelvinBerkoh",
-        type: "github",
-      },
-    ],
-    featured: true,
-  },
+  slug: "coveytown-escape-room",
+  title: "Covey.Town Escape Room",
+  category: "Multiplayer Game Feature",
+  summary:
+    "A cooperative multiplayer escape room built into Covey.Town where players join a lobby, solve synchronized puzzles, race against a timer, and earn a final performance grade.",
+  impact:
+    "Course/team project built inside a large existing TypeScript codebase with frontend game state logic, multiplayer flow, puzzle UIs, AWS-backed hosting support, scoring, and timer-based gameplay.",
+  tech: [
+    "React",
+    "TypeScript",
+    "Phaser",
+    "Tiled",
+    "Chakra UI",
+    "AWS",
+    "Game Controllers",
+  ],
+  highlights: [
+    "Built a multiplayer lobby flow for players joining and starting the escape room.",
+    "Integrated Caesar Cipher, Chess Puzzle, and Trivia mini-games into the escape room experience.",
+    "Worked on frontend behavior and game state logic for the escape room system.",
+    "Added scoring, countdown behavior, player count tracking, and reward feedback.",
+    "Used AWS to support backend hosting during development/testing.",
+    "Worked inside an existing Covey.Town codebase instead of building a standalone app.",
+  ],
+  overview:
+    "The Covey.Town Escape Room project added a cooperative game experience to an existing virtual environment. Covey.Town already supported social interaction, but our project focused on adding a more collaborative activity for groups larger than two players. Players enter an escape room lobby, wait for enough players to join, then work together to solve mini-games before time runs out. The experience includes puzzle UIs, scoring, player tracking, timer behavior, AWS-supported backend hosting, and a final reward screen based on score and remaining time.",
+  techStack: ["React", "TypeScript", "JavaScript", "HTML", "CSS"],
+  libraries: [
+    {
+      name: "Phaser",
+      description:
+        "Used as the game framework for interactive areas and player-facing game behavior inside the Covey.Town environment.",
+    },
+    {
+      name: "Tiled",
+      description:
+        "Used as the map editor for designing the playable room layout and placing interactive puzzle areas.",
+    },
+    {
+      name: "Chakra UI",
+      description:
+        "Used for reusable interface components and modal-style game screens.",
+    },
+    {
+      name: "AWS",
+      description:
+        "Used to support backend hosting during development and testing.",
+    },
+    {
+      name: "Covey.Town Game Area Controllers",
+      description:
+        "Used to connect player state, lobby state, mini-game progress, and escape room status to the existing multiplayer architecture.",
+    },
+  ],
+  whatIBuilt: [
+    "Worked on frontend implementation and game state logic for the escape room experience.",
+    "Worked on the escape room lobby flow, including player count display, waiting status, and start-game behavior.",
+    "Helped build the Caesar Cipher puzzle UI where players decode an encrypted message using letter substitutions.",
+    "Helped build the Chess Logic Puzzle UI where players place pieces according to clue-based constraints.",
+    "Helped integrate Trivia gameplay into the overall escape room flow.",
+    "Connected mini-game progress to scoring and end-of-game reward behavior.",
+    "Helped debug UI flow issues across lobby state, puzzle state, timer behavior, and end-of-game state.",
+  ],
+  engineeringDecisions: [
+    "Kept the lobby flow separate from active gameplay so player readiness and game progress were easier to reason about.",
+    "Used separate puzzle screens for Caesar Cipher, Chess Puzzle, and Trivia so each mini-game could have its own interaction model.",
+    "Connected puzzle completion to a shared scoring model so the escape room could track overall progress.",
+    "Used timer-based gameplay to create urgency and make the experience feel like a real escape room.",
+    "Reused Covey.Town's existing GameArea structure instead of forcing a separate standalone architecture.",
+    "Used shared game state interfaces so multiplayer interactions could stay synchronized across players.",
+  ],
+  challenges: [
+    "Understanding and extending a large existing TypeScript codebase.",
+    "Synchronizing multiplayer interactions in real time.",
+    "Ensuring puzzle progress updated correctly for all players.",
+    "Coordinating game UI, player state, puzzle state, timer state, and scoring logic.",
+    "Making each puzzle understandable without overwhelming the player.",
+    "Balancing feature work, debugging, and polish within a course project timeline.",
+  ],
+  results: [
+    "Built a working multiplayer escape room feature inside Covey.Town.",
+    "Created multiple interactive mini-game experiences, including Caesar Cipher, Chess Puzzle, and Trivia.",
+    "Implemented a lobby flow with player count, waiting state, countdown behavior, and start-game controls.",
+    "Added end-of-game feedback with score, time remaining, and a Gold/Silver/Bronze-style performance grade.",
+    "Used AWS-backed hosting support during development and testing.",
+    "Gained experience working in a large team codebase with React, TypeScript, game logic, and multiplayer state.",
+  ],
+  limitations: [
+    "The project was built as part of a course/team codebase, so there is no public live deployment.",
+    "The GitHub repository is a shared team repository, so this case study focuses on my role and the feature implementation rather than claiming full individual ownership.",
+    "The project may require local setup to run.",
+    "A short demo video would make the project easier for recruiters to evaluate quickly.",
+  ],
+  nextSteps: [
+    "Record a short walkthrough video showing the lobby, puzzles, scoring, and reward screen.",
+    "Add more randomized puzzle variations to improve replayability.",
+    "Improve onboarding instructions for first-time players.",
+    "Add stronger tests for lobby state, timer behavior, and puzzle completion.",
+    "Polish the UI so the experience feels more production-ready.",
+  ],
+  screenshots: [
+    {
+      src: "/projects/coveytown/lobby-waiting.png",
+      alt: "Covey.Town Escape Room lobby waiting for players",
+      caption:
+        "Escape Room lobby showing player count, waiting status, puzzle overview, and start-game controls.",
+    },
+    {
+      src: "/projects/coveytown/lobby-countdown.png",
+      alt: "Covey.Town Escape Room lobby countdown with three players",
+      caption:
+        "Multiplayer lobby state showing active players and countdown behavior before the game starts.",
+    },
+    {
+      src: "/projects/coveytown/caesar-cipher.png",
+      alt: "Caesar Cipher mini-game interface",
+      caption:
+        "Caesar Cipher puzzle where players decrypt a hidden message using letter substitutions and hints.",
+    },
+    {
+      src: "/projects/coveytown/chess-puzzle.png",
+      alt: "Chess logic puzzle interface",
+      caption:
+        "Chess logic puzzle where players place pieces according to clue-based constraints.",
+    },
+    
+  ],
+  links: [
+    {
+      label: "View Presentation",
+      href: "/projects/coveytown/escape-room-presentation.pdf",
+      type: "presentation",
+    },
+    {
+      label: "View GitHub Repo",
+      href: "https://github.com/njit-jerse/group-project-team-5/tree/main",
+      type: "github",
+    },
+    
+  ],
+  featured: true,
+},
   {
   slug: "nyc-aquatics-enrollment-prediction",
   title: "NYC Aquatics Enrollment Prediction",
