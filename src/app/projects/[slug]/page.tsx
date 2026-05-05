@@ -138,6 +138,58 @@ export default async function ProjectPage({
           </SectionCard>
         </section>
 
+        {project.slug === "policyscope" &&
+          project.categoryHighlights &&
+          project.categoryHighlights.length > 0 && (
+            <section className="mt-8">
+              <div className="mb-5 space-y-2">
+                <h2 className="text-2xl font-bold tracking-tight">
+                  Detected Clause Areas
+                </h2>
+                <p className="text-muted-foreground">
+                  PolicyScope organizes detected clauses into color-coded
+                  categories so users can scan risk areas quickly without
+                  reading the full policy.
+                </p>
+              </div>
+
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+                {project.categoryHighlights.map((category) => (
+                  <Card
+                    key={category.name}
+                    className="h-full border-l-4"
+                    style={{ borderLeftColor: category.color }}
+                  >
+                    <CardContent className="space-y-2 p-5">
+                      <div
+                        className="h-2 w-16 rounded-full"
+                        style={{ backgroundColor: category.color }}
+                      />
+
+                      <h3 className="font-semibold">{category.name}</h3>
+
+                      <p className="text-sm leading-6 text-muted-foreground">
+                        <span
+                          className="box-decoration-clone rounded-sm px-1 py-0.5 dark:hidden"
+                          style={{ backgroundColor: `${category.color}26` }}
+                        >
+                          {category.description}
+                        </span>
+
+                        <span
+                          className="hidden decoration-[3px] underline underline-offset-4 dark:inline"
+                          style={{ textDecorationColor: category.color }}
+                        >
+                          {category.description}
+                        </span>
+                      </p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </section>
+          )}
+
         <section className="mt-8 grid gap-6 lg:grid-cols-2">
           <SectionCard title="Engineering Decisions">
             <BulletList items={project.engineeringDecisions} />
@@ -164,37 +216,40 @@ export default async function ProjectPage({
           </SectionCard>
         </section>
 
-{project.screenshots && project.screenshots.length > 0 && (
-  <section className="mt-10">
-    <div className="mb-5 space-y-2">
-      <h2 className="text-2xl font-bold tracking-tight">Project Visuals</h2>
-      <p className="text-muted-foreground">
-        Screenshots from the project presentation and analysis workflow.
-      </p>
-    </div>
+        {project.screenshots && project.screenshots.length > 0 && (
+          <section className="mt-10">
+            <div className="mb-5 space-y-2">
+              <h2 className="text-2xl font-bold tracking-tight">
+                Project Visuals
+              </h2>
+              <p className="text-muted-foreground">
+                Screenshots from the project presentation and analysis workflow.
+              </p>
+            </div>
 
-    <div className="grid gap-6 md:grid-cols-2">
-      {project.screenshots.map((screenshot) => (
-        <Card key={screenshot.src} className="overflow-hidden">
-          <div className="relative aspect-video bg-muted">
-            <Image
-              src={screenshot.src}
-              alt={screenshot.alt}
-              fill
-              className="object-cover"
-            />
-          </div>
+            <div className="grid gap-6 md:grid-cols-2">
+              {project.screenshots.map((screenshot) => (
+                <Card key={screenshot.src} className="overflow-hidden">
+                  <div className="relative aspect-video bg-muted">
+                    <Image
+                      src={screenshot.src}
+                      alt={screenshot.alt}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
 
-          <CardContent className="p-4">
-            <p className="text-sm leading-6 text-muted-foreground">
-              {screenshot.caption}
-            </p>
-          </CardContent>
-        </Card>
-      ))}
-    </div>
-  </section>
-)}
+                  <CardContent className="p-4">
+                    <p className="text-sm leading-6 text-muted-foreground">
+                      {screenshot.caption}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </section>
+        )}
+
         <section className="mt-10 rounded-2xl border bg-muted/40 p-8">
           <div className="max-w-3xl space-y-3">
             <h2 className="text-2xl font-bold tracking-tight">

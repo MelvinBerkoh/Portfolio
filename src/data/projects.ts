@@ -33,117 +33,208 @@ export type Project = {
     alt: string;
     caption: string;
   }[];
+
+  categoryHighlights?: {
+    name: string;
+    description: string;
+    color: string;
+  }[];
   featured?: boolean;
 };
 
 export const projects: Project[] = [
   {
-    slug: "policyscope",
-    title: "PolicyScope",
-    category: "Chrome Extension / AI Tool",
-    summary:
-      "A locally run Chrome extension prototype that helps users understand Terms of Service and privacy policy pages by detecting important clauses, organizing them by category, and generating plain-English AI summaries.",
-    impact:
-      "Senior capstone project that placed 3rd overall. Built and demonstrated as a local Chrome extension prototype.",
-    tech: [
-      "Chrome MV3",
-      "JavaScript",
-      "Node.js",
-      "Express",
-      "OpenAI API",
-      "HTML",
-      "CSS",
-    ],
-    highlights: [
-      "Built a local Chrome extension prototype for analyzing policy pages.",
-      "Detected important policy topics such as data collection, billing, disputes, account access, and user rights.",
-      "Created a popup UI for organizing detected clauses into readable categories.",
-      "Connected selected policy text to a backend API for AI-generated plain-English summaries.",
-      "Presented the project as a senior capstone and placed 3rd overall.",
-    ],
-    overview:
-      "PolicyScope was built to make long online agreements easier to understand. Instead of expecting users to manually read through dense Terms of Service or privacy policy pages, the extension prototype scans policy text, identifies important clause categories, and presents the results in a simplified popup interface. The project focused on transparency, readability, and helping users quickly notice terms related to billing, data collection, legal disputes, account access, and content rights.",
-    techStack: [
-      "JavaScript",
-      "HTML",
-      "CSS",
-      "Node.js",
-      "Express",
-      "OpenAI API",
-      "Chrome Extension Manifest V3",
-    ],
-    libraries: [
-      {
-        name: "Chrome Extension APIs",
-        description:
-          "Used to run content scripts, manage popup behavior, and communicate between the webpage, extension UI, and background logic.",
-      },
-      {
-        name: "Express",
-        description:
-          "Used to create a lightweight backend API that received policy text and returned AI-generated summaries.",
-      },
-      {
-        name: "OpenAI API",
-        description:
-          "Used to generate plain-English explanations of selected policy clauses.",
-      },
-      {
-        name: "Figma",
-        description:
-          "Used during the design process to plan the extension interface and category layout.",
-      },
-    ],
-    whatIBuilt: [
-      "Implemented the browser-extension structure for scanning policy pages locally.",
-      "Worked on the popup interface that displays detected policy categories and clause counts.",
-      "Helped organize policy clause categories such as Data Collection, Data Sharing, Billing & Subscriptions, Legal & Disputes, Account & Access, and Content & User Rights.",
-      "Connected frontend extension behavior with backend API logic for AI summaries.",
-      "Helped debug the flow between content scripts, popup UI, background logic, and backend requests.",
-    ],
-    engineeringDecisions: [
-      "Separated page scanning, clause detection, and highlighting logic so the extension was easier to debug.",
-      "Used category-based detection so users could understand the type of risk instead of only seeing raw highlighted text.",
-      "Kept the prototype local instead of publishing to the Chrome Web Store so the team could focus on core functionality for the capstone deadline.",
-      "Used AI summaries as an explanation layer, not as the only source of detection, so the extension still had deterministic category output.",
-      "Designed the popup around grouped categories to keep the interface readable even when many clauses were detected.",
-    ],
-    challenges: [
-      "Filtering policy-related content from real webpages without grabbing too much unrelated page text.",
-      "Making the popup UI readable while still showing useful category and clause information.",
-      "Coordinating frontend extension behavior with backend API calls.",
-      "Debugging Chrome extension message passing during local development.",
-      "Balancing project scope with the capstone timeline.",
-    ],
-    results: [
-      "Created a working local Chrome extension prototype that demonstrated the core PolicyScope concept.",
-      "Built a UI that organized detected policy clauses into clear categories.",
-      "Integrated AI-generated explanations to make dense policy language easier to understand.",
-      "Presented the project successfully as a senior capstone.",
-      "Placed 3rd overall in the capstone showcase.",
-    ],
-    limitations: [
-      "The extension was not published to the Chrome Web Store.",
-      "The prototype was demonstrated locally during development and presentation.",
-      "Detection was based on structured matching logic and would need stronger classification for production use.",
-      "A public demo video or hosted walkthrough still needs to be added.",
-    ],
-    nextSteps: [
-      "Prepare the extension for Chrome Web Store deployment.",
-      "Improve clause detection with a stronger classification model.",
-      "Add user-controlled highlight colors and category toggles.",
-      "Add persistent user settings for extension preferences.",
-      "Create a short public demo video showing the extension running locally on a real policy page.",
-    ],
-    links: [
-      {
-        label: "GitHub Profile",
-        href: "https://github.com/MelvinBerkoh",
-        type: "github",
-      },
-    ],
-    featured: true,
-  },
+  slug: "policyscope",
+  title: "PolicyScope",
+  category: "Chrome Extension / AI Tool",
+  summary:
+    "A Chrome extension prototype that scans Terms of Service and Privacy Policy pages, detects important clauses, highlights them on the page, and explains them in plain English using an AI-assisted backend.",
+  impact:
+    "Senior capstone project that placed 3rd overall. My role focused on backend logic and clause detection.",
+  tech: [
+    "Chrome MV3",
+    "JavaScript",
+    "Node.js",
+    "Express",
+    "OpenAI API",
+    "HTML",
+    "CSS",
+  ],
+  highlights: [
+    "Built clause detection logic for identifying important policy sections.",
+    "Grouped detected clauses into user-friendly categories such as Data Collection, Billing, Legal Disputes, and Account Access.",
+    "Supported sentence-level highlighting so users could locate important clauses directly on the page.",
+    "Connected the extension to a Node/Express backend for secure AI-generated summaries.",
+    "Kept AI summarization on demand instead of making it part of the main detection pipeline.",
+    "Presented the project as a senior capstone and placed 3rd overall.",
+  ],
+  overview:
+    "PolicyScope was built to make long online agreements easier to understand. Instead of expecting users to manually read dense Terms of Service or Privacy Policy pages, the extension scans visible policy text, detects important clauses, groups them into broader categories, and lets users view simplified explanations. The project focused on making legal and policy language easier to scan, navigate, and understand before users agree to it.",
+  techStack: [
+    "JavaScript",
+    "HTML",
+    "CSS",
+    "Node.js",
+    "Express",
+    "OpenAI API",
+    "Chrome Extension Manifest V3",
+  ],
+  libraries: [
+    {
+      name: "Chrome Extension APIs",
+      description:
+        "Used for content scripts, popup behavior, background service worker messaging, page highlighting, and extension settings.",
+    },
+    {
+      name: "Node.js / Express",
+      description:
+        "Used to build a backend proxy for AI summarization so the OpenAI API key was never exposed inside the browser extension.",
+    },
+    {
+      name: "OpenAI API",
+      description:
+        "Used on demand to generate short plain-English summaries of selected policy clauses.",
+    },
+    {
+      name: "Chrome Storage",
+      description:
+        "Used to persist extension preferences such as highlight settings, category colors, and user options.",
+    },
+  ],
+  whatIBuilt: [
+    "Worked on backend functionality and clause detection for the extension.",
+    "Helped build the rule-based detection system that identifies policy clauses across major categories.",
+    "Supported the Big 8 category structure used in the popup UI.",
+    "Helped connect detected clauses to plain-English AI summaries through a backend API.",
+    "Worked on the flow between detected clauses, category drilldown, detail views, and locate-on-page behavior.",
+    "Helped test the extension on real Terms of Service and Privacy Policy pages.",
+  ],
+  engineeringDecisions: [
+    "Separated parsing, detection, highlighting, popup display, settings, and backend responsibilities so each part was easier to debug and update.",
+    "Used rule-based detection for the main pipeline so results could be fast and predictable.",
+    "Kept AI summaries on demand only, which made the extension faster and avoided unnecessary API calls.",
+    "Moved AI summarization to a backend proxy so API keys were not exposed in the browser extension.",
+    "Rendered AI summaries as plain text only to avoid unsafe dynamic HTML injection.",
+    "Used sentence-level highlighting instead of highlighting entire paragraphs so the page stayed readable.",
+  ],
+  challenges: [
+    "Improving clause detection accuracy while reducing false positives.",
+    "Filtering noisy webpage content such as navigation, buttons, hidden elements, and unrelated text.",
+    "Handling policy pages where content loads dynamically after the initial page render.",
+    "Keeping the popup UI organized even when many clauses were detected.",
+    "Protecting the API key by routing AI requests through a backend instead of the extension frontend.",
+    "Balancing technical scope with the capstone deadline.",
+  ],
+  results: [
+    "Built a working Chrome extension prototype that detected and organized policy clauses from real webpages.",
+    "Created a popup interface with category counts, subcategory drilldown, clause details, and settings.",
+    "Added page highlighting so users could locate important policy language directly in the original document.",
+    "Integrated AI-generated plain-English summaries through a secure backend flow.",
+    "Collected user testing feedback with 4.5/5 for ease of understanding Terms of Service and 4.6/5 for helpfulness.",
+    "96% of surveyed users said they would recommend or use the tool.",
+  ],
+  limitations: [
+    "The extension was not published to the Chrome Web Store.",
+    "The project was demonstrated as a working local Chrome extension prototype.",
+    "Clause detection was rule-based, so a production version would need stronger classification and broader testing.",
+    "A hosted live demo link will be added once the final demo is available.",
+  ],
+  nextSteps: [
+    "Prepare the extension for Chrome Web Store deployment.",
+    "Improve detection accuracy with stronger classification beyond regex and keyword rules.",
+    "Add policy-change alerts when a site's Terms of Service updates.",
+    "Expand detection across more policy formats and document structures.",
+    "Add cross-browser support for Firefox and Edge.",
+    "Create a short public demo video showing PolicyScope running on a real policy page.",
+  ],
+  categoryHighlights: [
+    {
+      name: "Data Collection",
+      description: "Tracking, retention, personal data, and sensitive information.",
+      color: "#7ccf9b",
+    },
+    {
+      name: "Data Sharing",
+      description: "Third-party services, affiliates, partners, and external sharing.",
+      color: "#7fc4b7",
+    },
+    {
+      name: "Billing & Subscriptions",
+      description: "Auto-renewal, refunds, cancellation terms, and price changes.",
+      color: "#d8b45a",
+    },
+    {
+      name: "Legal & Disputes",
+      description: "Arbitration, liability limits, waivers, and dispute resolution.",
+      color: "#df7575",
+    },
+    {
+      name: "Account & Access",
+      description: "Account termination, restrictions, suspensions, and access rules.",
+      color: "#a9d3f5",
+    },
+    {
+      name: "Content & User Rights",
+      description: "User-generated content licenses and platform content rights.",
+      color: "#b58be8",
+    },
+    {
+      name: "Policy Changes",
+      description: "Updates to terms, notices, and communication requirements.",
+      color: "#9bb7ff",
+    },
+    {
+      name: "Age Restrictions",
+      description: "Age limits, minor restrictions, and eligibility language.",
+      color: "#d39a6a",
+    },
+  ],
+  screenshots: [
+    {
+      src: "/projects/policyscope/popup.png",
+      alt: "PolicyScope popup showing detected policy categories",
+      caption:
+        "Popup view showing detected policy categories, clause counts, and navigation into category details.",
+    },
+    {
+      src: "/projects/policyscope/settings-page.png",
+      alt: "PolicyScope settings page with scan behavior and category colors",
+      caption:
+        "Settings page for scan behavior, AI summaries, night mode, and category highlight colors.",
+    },
+    {
+      src: "/projects/policyscope/ai-summary.png",
+      alt: "PolicyScope AI summary view explaining a legal clause",
+      caption:
+        "Clause detail view showing the original policy text and an AI-generated plain-English explanation.",
+    },
+    {
+      src: "/projects/policyscope/category-drilldown.png",
+      alt: "PolicyScope Legal and Disputes category drilldown",
+      caption:
+        "Category drilldown showing detected subcategories such as dispute resolution and liability limits.",
+    },
+    {
+      src: "/projects/policyscope/example-highlight.png",
+      alt: "PolicyScope highlighted clause on an Amazon policy page",
+      caption:
+        "On-page highlighting showing how PolicyScope marks detected policy language directly in the source document.",
+    },
+  ],
+  links: [
+    {
+      label: "View GitHub Repo",
+      href: "https://github.com/MelvinBerkoh/Policy-Scope",
+      type: "github",
+    },
+    {
+      label: "View Presentation",
+      href: "/projects/policyscope/policyscope-final-presentation.pdf",
+      type: "presentation",
+    },
+  ],
+  featured: true,
+},
   {
   slug: "coveytown-escape-room",
   title: "Covey.Town Escape Room",
