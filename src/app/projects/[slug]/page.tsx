@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ExternalLink } from "lucide-react";
 
 import { projects } from "@/data/projects";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -22,7 +22,7 @@ function SectionCard({
   children: React.ReactNode;
 }) {
   return (
-    <Card>
+    <Card className="h-full">
       <CardContent className="space-y-4 p-6">
         <h2 className="text-xl font-semibold tracking-tight">{title}</h2>
         {children}
@@ -87,12 +87,35 @@ export default async function ProjectPage({
           </p>
 
           <p className="text-base font-medium">{project.impact}</p>
+
+          <div className="flex flex-wrap gap-3 pt-2">
+            {project.links.map((link) => (
+              <Button key={link.href} asChild variant="outline">
+                <Link href={link.href} target="_blank">
+                  {link.label}
+                  <ExternalLink className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            ))}
+          </div>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-[0.75fr_1.25fr]">
+        <section className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
+          <SectionCard title="Overview">
+            <p className="leading-7 text-muted-foreground">
+              {project.overview}
+            </p>
+          </SectionCard>
+
+          <SectionCard title="What I Built">
+            <BulletList items={project.whatIBuilt} />
+          </SectionCard>
+        </section>
+
+        <section className="mt-8 grid gap-6 lg:grid-cols-[0.7fr_1.3fr]">
           <SectionCard title="Tech Stack">
             <div className="flex flex-wrap gap-2">
-              {project.tech.map((item) => (
+              {project.techStack.map((item) => (
                 <Badge key={item} variant="outline">
                   {item}
                 </Badge>
@@ -100,30 +123,23 @@ export default async function ProjectPage({
             </div>
           </SectionCard>
 
-          <SectionCard title="Project Highlights">
-            <BulletList items={project.highlights} />
-          </SectionCard>
-        </div>
-
-        <section className="mt-8 grid gap-6 md:grid-cols-2">
-          <SectionCard title="Problem">
-            <p className="leading-7 text-muted-foreground">{project.problem}</p>
-          </SectionCard>
-
-          <SectionCard title="Solution">
-            <p className="leading-7 text-muted-foreground">{project.solution}</p>
-          </SectionCard>
-        </section>
-
-        <section className="mt-8">
-          <SectionCard title="My Role">
-            <p className="leading-7 text-muted-foreground">{project.role}</p>
+          <SectionCard title="Libraries / Tools">
+            <div className="space-y-4">
+              {project.libraries.map((library) => (
+                <div key={library.name}>
+                  <h3 className="font-medium">{library.name}</h3>
+                  <p className="mt-1 leading-7 text-muted-foreground">
+                    {library.description}
+                  </p>
+                </div>
+              ))}
+            </div>
           </SectionCard>
         </section>
 
         <section className="mt-8 grid gap-6 lg:grid-cols-2">
-          <SectionCard title="Technical Architecture">
-            <BulletList items={project.architecture} />
+          <SectionCard title="Engineering Decisions">
+            <BulletList items={project.engineeringDecisions} />
           </SectionCard>
 
           <SectionCard title="Challenges">
@@ -136,53 +152,16 @@ export default async function ProjectPage({
             <BulletList items={project.results} />
           </SectionCard>
 
+          <SectionCard title="Limitations / Context">
+            <BulletList items={project.limitations} />
+          </SectionCard>
+        </section>
+
+        <section className="mt-8">
           <SectionCard title="Next Improvements">
             <BulletList items={project.nextSteps} />
           </SectionCard>
         </section>
-        {project.screenshots && project.screenshots.length > 0 && (
-  <section className="mt-10">
-    <div className="mb-5 space-y-2">
-      <h2 className="text-2xl font-bold tracking-tight">Screenshots</h2>
-      <p className="text-muted-foreground">
-        A closer look at the interface and functionality behind this project.
-      </p>
-    </div>
-
-    <div className="grid gap-6 md:grid-cols-2">
-      {project.screenshots.map((screenshot) => (
-        <Card key={screenshot.src} className="overflow-hidden">
-          <div className="relative aspect-video bg-muted">
-            <Image
-              src={screenshot.src}
-              alt={screenshot.alt}
-              fill
-              className="object-cover"
-            />
-          </div>
-
-          <CardContent className="p-4">
-            <p className="text-sm text-muted-foreground">
-              {screenshot.caption}
-            </p>
-          </CardContent>
-        </Card>
-      ))}
-    </div>
-  </section>
-)}
-
-{project.links && project.links.length > 0 && (
-  <section className="mt-8 flex flex-wrap gap-3">
-    {project.links.map((link) => (
-      <Button key={link.href} asChild variant="outline">
-        <Link href={link.href} target="_blank">
-          {link.label}
-        </Link>
-      </Button>
-    ))}
-  </section>
-)}
 
         <section className="mt-10 rounded-2xl border bg-muted/40 p-8">
           <div className="max-w-3xl space-y-3">
@@ -190,10 +169,11 @@ export default async function ProjectPage({
               Why this project matters
             </h2>
             <p className="leading-7 text-muted-foreground">
-              This project shows more than just coding syntax. It shows problem
-              solving, architecture decisions, debugging, user experience
-              thinking, and the ability to connect multiple parts of a software
-              system into something usable.
+              This project shows practical software engineering beyond writing
+              isolated code. It reflects planning, debugging, technical
+              decision-making, user experience thinking, and the ability to
+              connect multiple parts of a system into something that can be
+              demonstrated and explained.
             </p>
           </div>
         </section>
