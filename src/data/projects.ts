@@ -28,6 +28,11 @@ export type Project = {
   nextSteps: string[];
   links: ProjectLink[];
 
+  screenshots?: {
+    src: string;
+    alt: string;
+    caption: string;
+  }[];
   featured?: boolean;
 };
 
@@ -320,12 +325,49 @@ export const projects: Project[] = [
     "Add a GitHub README explaining the dataset, workflow, results, and limitations.",
     "Turn the notebook into a small dashboard or interactive report.",
   ],
+  screenshots: [
+  {
+    src: "/projects/nyc-aquatics/overview-slide.png",
+    alt: "NYC Aquatics enrollment prediction project overview slide",
+    caption:
+      "Project overview showing the goal of predicting enrollment using pool type, borough, and class type.",
+  },
+  {
+    src: "/projects/nyc-aquatics/dataset-slide.png",
+    alt: "NYC Aquatics dataset slide showing rows and selected columns",
+    caption:
+      "Dataset summary showing cleaned rows, selected categorical features, and the numerical target variable.",
+  },
+  {
+    src: "/projects/nyc-aquatics/results-slide.png",
+    alt: "NYC Aquatics regression results showing R squared, MAE, and RMSE",
+    caption:
+      "Regression results showing R², Mean Absolute Error, and Root Mean Squared Error.",
+  },
+  {
+    src: "/projects/nyc-aquatics/scatterplot-slide.png",
+    alt: "Actual versus predicted enrollment scatterplot",
+    caption:
+      "Visualization comparing actual enrollment against predicted enrollment.",
+  },
+  {
+    src: "/projects/nyc-aquatics/feature-impact-slide.png",
+    alt: "Feature impact chart for NYC Aquatics enrollment prediction",
+    caption:
+      "Feature impact analysis showing which class types, pools, and boroughs influenced predicted enrollment.",
+  },
+],
   links: [
-    {
-      label: "GitHub Profile",
-      href: "https://github.com/MelvinBerkoh",
-      type: "github",
-    },
+   {
+    label: "Watch Demo",
+    href: "https://youtu.be/HBywMMbr7Ak",
+    type: "demo",
+  },
+  {
+    label: "GitHub Profile",
+    href: "https://github.com/MelvinBerkoh/Intro-to-Data-Science/blob/master/Notebook/Projects/project1.ipynb",
+    type: "github",
+  },
   ],
   featured: true,
 },
