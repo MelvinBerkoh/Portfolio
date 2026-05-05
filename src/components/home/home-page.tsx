@@ -38,6 +38,29 @@ const skills = [
   "GitHub",
 ];
 
+const workHabits = [
+  {
+    title: "Team Collaboration",
+    description:
+      "Worked on team projects where features had to fit into shared codebases, existing architecture, and group deadlines.",
+  },
+  {
+    title: "Clear Communication",
+    description:
+      "Presented technical work through demos, case studies, documentation, and project walkthroughs.",
+  },
+  {
+    title: "Debugging Mindset",
+    description:
+      "Comfortable tracing issues across UI state, API calls, browser behavior, local setup, and project configuration.",
+  },
+  {
+    title: "Ownership",
+    description:
+      "I care about taking a feature from rough idea to working implementation, then improving the details through testing and feedback.",
+  },
+];
+
 export function HomePage() {
   const featuredProjects = projects.filter((project) => project.featured);
 
@@ -255,6 +278,42 @@ export function HomePage() {
             <Badge key={skill} variant="secondary" className="px-4 py-2 text-sm">
               {skill}
             </Badge>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 py-16">
+        <div className="mb-8 max-w-3xl space-y-3">
+          <Badge variant="outline">How I Work</Badge>
+          <h2 className="text-3xl font-bold tracking-tight">
+            I focus on building clearly, communicating well, and improving
+            through feedback.
+          </h2>
+          <p className="text-muted-foreground">
+            My strongest projects involved working in teams, debugging real
+            integration issues, and explaining technical decisions clearly enough
+            for both developers and non-technical audiences.
+          </p>
+        </div>
+
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          {workHabits.map((habit, index) => (
+            <motion.div
+              key={habit.title}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.35, delay: index * 0.06 }}
+            >
+              <Card className="h-full transition hover:-translate-y-1 hover:shadow-md">
+                <CardContent className="space-y-3 p-6">
+                  <h3 className="font-semibold">{habit.title}</h3>
+                  <p className="text-sm leading-6 text-muted-foreground">
+                    {habit.description}
+                  </p>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
         </div>
       </section>
