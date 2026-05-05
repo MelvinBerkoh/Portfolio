@@ -229,89 +229,104 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    slug: "machine-learning-project",
-    title: "Machine Learning Project",
-    category: "Data Science / ML",
-    summary:
-      "A machine learning project involving data cleaning, exploratory data analysis, model training, and performance evaluation using real-world datasets.",
-    impact:
-      "Demonstrates Python, data analysis, model evaluation, and communication of technical results.",
-    tech: [
-      "Python",
-      "pandas",
-      "scikit-learn",
-      "matplotlib",
-      "Jupyter Notebook",
-    ],
-    highlights: [
-      "Cleaned and prepared real-world datasets for modeling.",
-      "Performed exploratory data analysis with visualizations.",
-      "Trained and evaluated machine learning models.",
-      "Explained results using metrics such as accuracy, precision, recall, F1-score, and ROC-AUC.",
-    ],
-    overview:
-      "This project focused on building a complete machine learning workflow from raw data to model evaluation. The goal was not only to train a model, but also to clean the data, understand the features, evaluate model performance, and explain the results clearly.",
-    techStack: ["Python", "Jupyter Notebook"],
-    libraries: [
-      {
-        name: "pandas",
-        description:
-          "Used for loading, cleaning, filtering, and transforming tabular data.",
-      },
-      {
-        name: "scikit-learn",
-        description:
-          "Used for train/test splitting, preprocessing, model training, and evaluation metrics.",
-      },
-      {
-        name: "matplotlib",
-        description:
-          "Used to create visualizations for exploratory data analysis and result explanation.",
-      },
-    ],
-    whatIBuilt: [
-      "Built a notebook workflow for cleaning and preparing the dataset.",
-      "Handled missing values and prepared features for model training.",
-      "Created visualizations to understand patterns in the data.",
-      "Trained models using a train/test split.",
-      "Evaluated model performance using multiple metrics instead of relying on accuracy alone.",
-    ],
-    engineeringDecisions: [
-      "Used a structured notebook flow so the analysis could be followed from data loading to evaluation.",
-      "Evaluated multiple metrics because accuracy alone can hide poor model performance.",
-      "Separated preprocessing from model evaluation to keep the workflow easier to explain.",
-      "Used visualizations to support conclusions instead of only reporting numbers.",
-    ],
-    challenges: [
-      "Handling messy or incomplete data.",
-      "Choosing useful features without overfitting.",
-      "Explaining model results clearly in a way that non-technical readers could still understand.",
-      "Balancing code, charts, and written interpretation inside the notebook.",
-    ],
-    results: [
-      "Completed an end-to-end machine learning workflow.",
-      "Improved my ability to clean data and prepare features.",
-      "Practiced model evaluation using real metrics.",
-      "Built stronger technical communication skills through written analysis.",
-    ],
-    limitations: [
-      "The project currently works best as a notebook, not a deployed application.",
-      "The GitHub repository should include a cleaner README and final result summary.",
-      "Additional tuning and feature-importance analysis would make the project stronger.",
-    ],
-    nextSteps: [
-      "Add hyperparameter tuning.",
-      "Compare more model types.",
-      "Add feature-importance or SHAP analysis.",
-      "Clean up the GitHub repository with a stronger README and project summary.",
-    ],
-    links: [
-      {
-        label: "GitHub Profile",
-        href: "https://github.com/MelvinBerkoh",
-        type: "github",
-      },
-    ],
-    featured: true,
-  },
+  slug: "nyc-aquatics-enrollment-prediction",
+  title: "NYC Aquatics Enrollment Prediction",
+  category: "Data Science / Regression",
+  summary:
+    "A regression project that predicts enrollment numbers for NYC aquatics programs using borough, swimming pool, and class type data from NYC Open Data.",
+  impact:
+    "Built a complete data science workflow with data cleaning, one-hot encoding, multiple linear regression, model evaluation, and visual analysis.",
+  tech: [
+    "Python",
+    "pandas",
+    "NumPy",
+    "scikit-learn",
+    "matplotlib",
+    "Jupyter Notebook",
+  ],
+  highlights: [
+    "Cleaned a real NYC Open Data dataset for aquatics programming.",
+    "Used borough, swimming pool, and class type as predictors for total registration.",
+    "Applied one-hot encoding to convert categorical variables into model-ready features.",
+    "Trained a multiple linear regression model to predict enrollment.",
+    "Evaluated the model using R², MAE, and RMSE.",
+    "Created visualizations comparing actual vs. predicted enrollment.",
+  ],
+  overview:
+    "This project used NYC Open Data to predict enrollment numbers for aquatics programs across New York City. The goal was to understand whether program location, pool type, and class type could help predict total registration. I built a regression workflow that cleaned the dataset, selected relevant features, transformed categorical variables, trained a model, and evaluated how well it predicted enrollment.",
+  techStack: ["Python", "Jupyter Notebook"],
+  libraries: [
+    {
+      name: "pandas",
+      description:
+        "Used to load the dataset, clean missing values, select relevant columns, and prepare the data for modeling.",
+    },
+    {
+      name: "NumPy",
+      description:
+        "Used for numerical operations during preprocessing and model preparation.",
+    },
+    {
+      name: "scikit-learn",
+      description:
+        "Used for one-hot encoding, train/test splitting, linear regression modeling, and performance evaluation.",
+    },
+    {
+      name: "matplotlib",
+      description:
+        "Used to create visualizations such as actual vs. predicted enrollment and feature impact charts.",
+    },
+  ],
+  whatIBuilt: [
+    "Loaded and cleaned the NYC aquatics programming dataset.",
+    "Dropped incomplete rows from critical columns before training the model.",
+    "Selected Borough, Swimming Pool, and Class Type as features because location, pool, and class category could influence enrollment.",
+    "Converted categorical variables into binary columns using one-hot encoding.",
+    "Trained a multiple linear regression model to predict Total Registration.",
+    "Evaluated the model using R² Score, Mean Absolute Error, and Root Mean Squared Error.",
+    "Created charts to compare predicted enrollment against actual enrollment.",
+  ],
+  engineeringDecisions: [
+    "Used regression because the target variable, Total Registration, is numerical.",
+    "Kept the first version focused on interpretable features instead of adding unnecessary complexity.",
+    "Used one-hot encoding because the main predictors were categorical variables.",
+    "Dropped incomplete rows rather than filling values because the missing data was in critical modeling columns.",
+    "Used MAE and RMSE together so the model could be judged by average error and larger prediction mistakes.",
+  ],
+  challenges: [
+    "Cleaning a real-world dataset with missing values.",
+    "Turning categorical data into a format that a regression model could use.",
+    "Choosing features that made practical sense for predicting enrollment.",
+    "Interpreting model results clearly instead of only reporting numbers.",
+    "Explaining which class types, pools, and boroughs had the strongest effect on predicted enrollment.",
+  ],
+  results: [
+    "Cleaned the dataset down to 6,217 usable rows.",
+    "Built a multiple linear regression model with an R² score of 0.5967.",
+    "Achieved a Mean Absolute Error of 5.56, meaning predictions were off by about 6 registrations on average.",
+    "Achieved a Root Mean Squared Error of 7.21, showing the typical size of larger prediction errors.",
+    "Identified class type, pool location, and borough as meaningful factors in enrollment prediction.",
+  ],
+  limitations: [
+    "The model only used borough, swimming pool, and class type, so other possible factors were not included.",
+    "Rows with missing values were dropped, which reduced the dataset size.",
+    "Linear regression may miss more complex relationships in the data.",
+    "The project was completed as a notebook and presentation, not as a deployed web application.",
+  ],
+  nextSteps: [
+    "Test additional models such as Random Forest Regression or Gradient Boosting.",
+    "Add more features if available, such as season, time of day, age group, or attendance history.",
+    "Improve the visualizations and create a cleaner public notebook.",
+    "Add a GitHub README explaining the dataset, workflow, results, and limitations.",
+    "Turn the notebook into a small dashboard or interactive report.",
+  ],
+  links: [
+    {
+      label: "GitHub Profile",
+      href: "https://github.com/MelvinBerkoh",
+      type: "github",
+    },
+  ],
+  featured: true,
+},
 ];
