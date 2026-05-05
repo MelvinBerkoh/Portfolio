@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
 import {
@@ -61,53 +62,90 @@ const workHabits = [
   },
 ];
 
+const stats = [
+  {
+    value: "3rd",
+    label: "Place Capstone Project",
+  },
+  {
+    value: "3",
+    label: "Featured Case Studies",
+  },
+  {
+    value: "NJIT",
+    label: "Computer Science",
+  },
+];
+
 export function HomePage() {
   const featuredProjects = projects.filter((project) => project.featured);
 
   return (
-    <main className="min-h-screen bg-background text-foreground">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
-        <Link href="/" className="font-semibold tracking-tight">
-          Melvin Berkoh
-        </Link>
+    <main className="min-h-screen overflow-hidden bg-background text-foreground">
+      <div className="pointer-events-none fixed inset-0 -z-10">
+        <div className="absolute left-1/2 top-0 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute right-[-120px] top-48 h-[360px] w-[360px] rounded-full bg-muted-foreground/10 blur-3xl" />
+        <div className="absolute bottom-0 left-[-120px] h-[360px] w-[360px] rounded-full bg-primary/10 blur-3xl" />
+      </div>
 
-        <div className="flex items-center gap-3">
-          <Link
-            href="#projects"
-            className="hidden text-sm text-muted-foreground transition hover:text-foreground sm:inline"
-          >
-            Projects
+      <nav className="sticky top-0 z-50 border-b bg-background/75 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+          <Link href="/" className="font-semibold tracking-tight">
+            Melvin Berkoh
           </Link>
-          <Link
-            href="#skills"
-            className="hidden text-sm text-muted-foreground transition hover:text-foreground sm:inline"
-          >
-            Skills
-          </Link>
-          <Link
-            href="#contact"
-            className="hidden text-sm text-muted-foreground transition hover:text-foreground sm:inline"
-          >
-            Contact
-          </Link>
-          <ThemeToggle />
+
+          <div className="flex items-center gap-3">
+            <Link
+              href="#projects"
+              className="hidden text-sm text-muted-foreground transition hover:text-foreground sm:inline"
+            >
+              Projects
+            </Link>
+            <Link
+              href="#skills"
+              className="hidden text-sm text-muted-foreground transition hover:text-foreground sm:inline"
+            >
+              Skills
+            </Link>
+            <Link
+              href="#work"
+              className="hidden text-sm text-muted-foreground transition hover:text-foreground sm:inline"
+            >
+              How I Work
+            </Link>
+            <Link
+              href="#contact"
+              className="hidden text-sm text-muted-foreground transition hover:text-foreground sm:inline"
+            >
+              Contact
+            </Link>
+            <ThemeToggle />
+          </div>
         </div>
       </nav>
 
-      <section className="mx-auto grid max-w-6xl gap-10 px-6 py-16 md:grid-cols-[1.3fr_0.7fr] md:items-center md:py-24">
+      <section className="mx-auto grid max-w-6xl gap-10 px-6 py-16 md:grid-cols-[1.25fr_0.75fr] md:items-center md:py-24">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45 }}
-          className="space-y-6"
+          className="space-y-7"
         >
-          <Badge variant="secondary" className="w-fit">
-            Software Engineer • NJIT Computer Science
-          </Badge>
+          <div className="flex flex-wrap gap-3">
+            <Badge variant="secondary" className="w-fit">
+              Software Engineer • NJIT Computer Science
+            </Badge>
+            <Badge variant="outline" className="w-fit">
+              Open to Frontend / Full-Stack Roles
+            </Badge>
+          </div>
 
-          <div className="space-y-4">
+          <div className="space-y-5">
             <h1 className="max-w-4xl text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-              I build practical software that solves real problems.
+              I build practical software that{" "}
+              <span className="bg-gradient-to-r from-foreground via-foreground to-muted-foreground bg-clip-text text-transparent">
+                solves real problems.
+              </span>
             </h1>
 
             <p className="max-w-2xl text-lg leading-8 text-muted-foreground">
@@ -119,8 +157,11 @@ export function HomePage() {
           </div>
 
           <div className="flex flex-col gap-3 sm:flex-row">
-            <Button asChild size="lg">
-              <Link href="#projects">View Projects</Link>
+            <Button asChild size="lg" className="group">
+              <Link href="#projects">
+                View Projects
+                <ArrowUpRight className="ml-2 h-4 w-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Link>
             </Button>
 
             <Button asChild variant="outline" size="lg">
@@ -163,8 +204,9 @@ export function HomePage() {
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.45, delay: 0.1 }}
+          className="space-y-5"
         >
-          <Card className="border-border/70 shadow-sm">
+          <Card className="border-border/70 bg-card/80 shadow-sm backdrop-blur">
             <CardHeader>
               <CardTitle>Current Focus</CardTitle>
             </CardHeader>
@@ -189,75 +231,115 @@ export function HomePage() {
                 </div>
               </div>
 
-              <div className="rounded-xl bg-muted p-4">
+              <div className="rounded-xl border bg-muted/60 p-4">
                 <p className="font-medium text-foreground">
                   Strongest project:
                 </p>
                 <p>
-                  PolicyScope, an AI-powered Chrome extension that placed 3rd
+                  PolicyScope, an AI-assisted Chrome extension that placed 3rd
                   overall in a capstone showcase.
                 </p>
               </div>
             </CardContent>
           </Card>
+
+          <div className="grid grid-cols-3 gap-3">
+            {stats.map((stat) => (
+              <Card key={stat.label} className="bg-card/80 backdrop-blur">
+                <CardContent className="p-4 text-center">
+                  <p className="text-2xl font-bold">{stat.value}</p>
+                  <p className="mt-1 text-xs leading-5 text-muted-foreground">
+                    {stat.label}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </motion.div>
       </section>
 
-      <section id="projects" className="mx-auto max-w-6xl px-6 py-16">
+      <section
+        id="projects"
+        className="mx-auto max-w-6xl px-6 py-16 select-none"
+      >
         <div className="mb-8 max-w-2xl space-y-3">
           <Badge variant="outline">Featured Work</Badge>
           <h2 className="text-3xl font-bold tracking-tight">Projects</h2>
           <p className="text-muted-foreground">
             These projects show practical software engineering experience across
-            frontend development, full-stack integration, browser extensions,
-            AI tooling, multiplayer systems, and machine learning.
+            frontend development, full-stack integration, browser extensions, AI
+            tooling, multiplayer systems, and machine learning.
           </p>
         </div>
 
-        <div className="grid gap-5 md:grid-cols-3">
-          {featuredProjects.map((project, index) => (
-            <motion.div
-              key={project.slug}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.35, delay: index * 0.08 }}
-            >
-              <Card className="flex h-full flex-col transition hover:-translate-y-1 hover:shadow-md">
-                <CardHeader>
-                  <div className="mb-3">
-                    <Badge variant="secondary">{project.category}</Badge>
-                  </div>
-                  <CardTitle className="leading-tight">
-                    {project.title}
-                  </CardTitle>
-                </CardHeader>
+        <div className="grid gap-6 md:grid-cols-3">
+          {featuredProjects.map((project, index) => {
+            const previewImage = project.screenshots?.[0]?.src;
 
-                <CardContent className="flex flex-1 flex-col gap-5">
-                  <p className="text-sm leading-6 text-muted-foreground">
-                    {project.summary}
-                  </p>
+            return (
+              <motion.div
+                key={project.slug}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.35, delay: index * 0.08 }}
+              >
+                <Card className="group flex h-full flex-col overflow-hidden transition hover:-translate-y-1 hover:shadow-xl">
+                  <div className="relative h-48 overflow-hidden border-b bg-muted">
+                    {previewImage ? (
+                      <Image
+                        src={previewImage}
+                        alt={`${project.title} preview`}
+                        fill
+                        className="object-cover object-top transition duration-500 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="h-full w-full bg-gradient-to-br from-muted to-background" />
+                    )}
 
-                  <p className="text-sm font-medium">{project.impact}</p>
-
-                  <div className="flex flex-wrap gap-2">
-                    {project.tech.slice(0, 5).map((item) => (
-                      <Badge key={item} variant="outline">
-                        {item}
-                      </Badge>
-                    ))}
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
                   </div>
 
-                  <Button asChild variant="outline" className="mt-auto">
-                    <Link href={`/projects/${project.slug}`}>
-                      View Case Study
-                      <ArrowUpRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
+                  <CardHeader className="space-y-3">
+                    <Badge variant="secondary" className="w-fit">
+                      {project.category}
+                    </Badge>
+
+                    <CardTitle className="leading-tight">
+                      {project.title}
+                    </CardTitle>
+                  </CardHeader>
+
+                  <CardContent className="flex flex-1 flex-col gap-5">
+                    <p className="text-sm leading-6 text-muted-foreground">
+                      {project.summary}
+                    </p>
+
+                    <p className="text-sm font-medium">{project.impact}</p>
+
+                    <div className="flex flex-wrap gap-2">
+                      {project.tech.slice(0, 5).map((item) => (
+                        <Badge key={item} variant="outline">
+                          {item}
+                        </Badge>
+                      ))}
+                    </div>
+
+                    <Button
+                      asChild
+                      variant="outline"
+                      className="mt-auto group/button"
+                    >
+                      <Link href={`/projects/${project.slug}`}>
+                        View Case Study
+                        <ArrowUpRight className="ml-2 h-4 w-4 transition group-hover/button:translate-x-0.5 group-hover/button:-translate-y-0.5" />
+                      </Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            );
+          })}
         </div>
       </section>
 
@@ -274,15 +356,26 @@ export function HomePage() {
         </div>
 
         <div className="flex flex-wrap gap-3">
-          {skills.map((skill) => (
-            <Badge key={skill} variant="secondary" className="px-4 py-2 text-sm">
-              {skill}
-            </Badge>
+          {skills.map((skill, index) => (
+            <motion.div
+              key={skill}
+              initial={{ opacity: 0, y: 8 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.25, delay: index * 0.025 }}
+            >
+              <Badge
+                variant="secondary"
+                className="px-4 py-2 text-sm transition hover:-translate-y-0.5 hover:bg-primary hover:text-primary-foreground"
+              >
+                {skill}
+              </Badge>
+            </motion.div>
           ))}
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 py-16">
+      <section id="work" className="mx-auto max-w-6xl px-6 py-16">
         <div className="mb-8 max-w-3xl space-y-3">
           <Badge variant="outline">How I Work</Badge>
           <h2 className="text-3xl font-bold tracking-tight">
@@ -319,7 +412,7 @@ export function HomePage() {
       </section>
 
       <section className="mx-auto max-w-6xl px-6 py-16">
-        <Card>
+        <Card className="overflow-hidden">
           <CardContent className="grid gap-8 p-6 md:grid-cols-2 md:p-8">
             <div className="space-y-3">
               <Badge variant="outline">About</Badge>
