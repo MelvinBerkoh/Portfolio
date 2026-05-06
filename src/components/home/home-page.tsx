@@ -77,6 +77,26 @@ const stats = [
   },
 ];
 
+const moreProjects = [
+  {
+    title: "Cherries On Top Catering Website",
+    category: "Business Website / Early Web Project",
+    description:
+      "A real public website built from scratch with HTML, CSS, and JavaScript for a family-owned ice cream catering business. This was my first full website project and helped me learn responsive design, page structure, styling, forms, and deployment.",
+    tech: ["HTML", "CSS", "JavaScript", "Responsive Design", "Deployment"],
+    links: [
+      {
+        label: "Live Site",
+        href: "https://www.cherriesontopcatering.com/",
+      },
+      {
+        label: "GitHub Repo",
+        href: "https://github.com/MelvinBerkoh/CherriesOnTop",
+      },
+    ],
+  },
+];
+
 export function HomePage() {
   const featuredProjects = projects.filter((project) => project.featured);
 
@@ -100,6 +120,12 @@ export function HomePage() {
               className="hidden text-sm text-muted-foreground transition hover:text-foreground sm:inline"
             >
               Projects
+            </Link>
+            <Link
+              href="#more-projects"
+              className="hidden text-sm text-muted-foreground transition hover:text-foreground sm:inline"
+            >
+              More Work
             </Link>
             <Link
               href="#skills"
@@ -258,10 +284,7 @@ export function HomePage() {
         </motion.div>
       </section>
 
-      <section
-        id="projects"
-        className="mx-auto max-w-6xl px-6 py-16 select-none"
-      >
+      <section id="projects" className="mx-auto max-w-6xl px-6 py-16">
         <div className="mb-8 max-w-2xl space-y-3">
           <Badge variant="outline">Featured Work</Badge>
           <h2 className="text-3xl font-bold tracking-tight">Projects</h2>
@@ -340,6 +363,69 @@ export function HomePage() {
               </motion.div>
             );
           })}
+        </div>
+      </section>
+
+      <section id="more-projects" className="mx-auto max-w-6xl px-6 py-16">
+        <div className="mb-8 max-w-2xl space-y-3">
+          <Badge variant="outline">More Work</Badge>
+          <h2 className="text-3xl font-bold tracking-tight">
+            Additional projects
+          </h2>
+          <p className="text-muted-foreground">
+            Smaller projects and earlier work that show where I started, what
+            I&apos;ve shipped, and how my skills have grown over time.
+          </p>
+        </div>
+
+        <div className="grid gap-5">
+          {moreProjects.map((project, index) => (
+            <motion.div
+              key={project.title}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.35, delay: index * 0.08 }}
+            >
+              <Card className="overflow-hidden bg-card/80 backdrop-blur transition hover:-translate-y-1 hover:shadow-md">
+                <CardContent className="grid gap-6 p-6 md:grid-cols-[1.2fr_0.8fr] md:items-center">
+                  <div className="space-y-4">
+                    <Badge variant="secondary" className="w-fit">
+                      {project.category}
+                    </Badge>
+
+                    <div className="space-y-2">
+                      <h3 className="text-2xl font-semibold tracking-tight">
+                        {project.title}
+                      </h3>
+                      <p className="max-w-3xl leading-7 text-muted-foreground">
+                        {project.description}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-wrap gap-2">
+                      {project.tech.map((item) => (
+                        <Badge key={item} variant="outline">
+                          {item}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col gap-3 sm:flex-row md:justify-end">
+                    {project.links.map((link) => (
+                      <Button key={link.href} asChild variant="outline">
+                        <Link href={link.href} target="_blank">
+                          {link.label}
+                          <ArrowUpRight className="ml-2 h-4 w-4" />
+                        </Link>
+                      </Button>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
         </div>
       </section>
 
