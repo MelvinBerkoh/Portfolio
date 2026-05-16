@@ -220,6 +220,12 @@ export const projects: Project[] = [
       caption:
         "On-page highlighting showing how PolicyScope marks detected policy language directly in the source document.",
     },
+    {
+      src: "/projects/policyscope/capstone-certificate.png",
+      alt: "PolicyScope senior capstone third overall certificate",
+      caption:
+        "Certificate recognizing PolicyScope for placing 3rd overall in the Senior Capstone Project showcase.",
+    },
   ],
   links: [
     {

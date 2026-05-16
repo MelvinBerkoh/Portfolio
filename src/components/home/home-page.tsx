@@ -64,8 +64,8 @@ const workHabits = [
 
 const stats = [
   {
-    value: "3rd",
-    label: "Place Capstone Project",
+    value: "3rd Overall",
+    label: "Senior Capstone Project",
   },
   {
     value: "3",
