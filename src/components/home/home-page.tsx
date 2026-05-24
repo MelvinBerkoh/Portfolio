@@ -159,7 +159,7 @@ export function HomePage() {
         >
           <div className="flex flex-wrap gap-3">
             <Badge variant="secondary" className="w-fit">
-              Software Engineer • NJIT Computer Science
+              Software Engineer • NJIT CS Graduate
             </Badge>
             <Badge variant="outline" className="w-fit">
               Open to Frontend / Full-Stack Roles
@@ -175,17 +175,18 @@ export function HomePage() {
             </h1>
 
             <p className="max-w-2xl text-lg leading-8 text-muted-foreground">
-              I&apos;m Melvin Berkoh, a Computer Science student at NJIT focused
-              on frontend, full-stack, and web development. My work includes AI
-              tools, Chrome extensions, multiplayer game features, and
-              data-driven applications.
-            </p>
+                I&apos;m Melvin Berkoh, a recent Computer Science graduate from NJIT.
+                I build full-stack and frontend software with React, TypeScript,
+                JavaScript, Node.js, and Python, with experience turning messy
+                requirements into clean interfaces, useful tools, and project work
+                that can actually be demoed. 
+           </p>
           </div>
 
           <div className="flex flex-col gap-3 sm:flex-row">
             <Button asChild size="lg" className="group">
               <Link href="#projects">
-                View Projects
+                View Case Studies
                 <ArrowUpRight className="ml-2 h-4 w-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
             </Button>
@@ -234,7 +235,7 @@ export function HomePage() {
         >
           <Card className="border-border/70 bg-card/80 shadow-sm backdrop-blur">
             <CardHeader>
-              <CardTitle>Current Focus</CardTitle>
+              <CardTitle>Recruiter Snapshot</CardTitle>
             </CardHeader>
             <CardContent className="space-y-5 text-sm text-muted-foreground">
               <div className="flex gap-3">
@@ -258,14 +259,13 @@ export function HomePage() {
               </div>
 
               <div className="rounded-xl border bg-muted/60 p-4">
-                <p className="font-medium text-foreground">
-                  Strongest project:
-                </p>
-                <p>
-                  PolicyScope, an AI-assisted Chrome extension that placed 3rd
-                  overall in a senior capstone showcase.
-                </p>
-              </div>
+  <p className="font-medium text-foreground">What I bring:</p>
+  <p>
+    Hands-on experience building real software across frontend,
+    backend, AI-assisted tools, data projects, and client-facing web
+    work.
+  </p>
+</div>
             </CardContent>
           </Card>
 
