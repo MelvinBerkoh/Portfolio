@@ -10,6 +10,7 @@ export type Project = {
   category: string;
   summary: string;
   impact: string;
+  thumbnail?: string;
 
   tech: string[];
   highlights: string[];
@@ -239,6 +240,95 @@ export const projects: Project[] = [
       type: "presentation",
     },
   ],
+  thumbnail: "/projects/policyscope/thumbnail.png",
+  featured: true,
+},
+{
+  slug: "eligido-landing-page",
+  title: "Eligido Landing Page",
+  category: "Frontend / Startup Landing Page",
+  summary:
+    "Built the public-facing landing page for Eligido, an early-stage Web3 startup focused on behavioral advertising, contextual targeting, privacy, digitized incentives, and partner-based digital ecosystems.",
+  impact:
+    "Translated complex white paper, investor deck, and product vision material into a responsive React landing page that explained the startup’s value clearly to users, partners, and stakeholders.",
+
+  tech: ["React", "JavaScript", "HTML", "CSS", "Responsive Design"],
+
+  highlights: [
+    "Built a public-facing React landing page for an early-stage startup.",
+    "Translated complex product and investor material into user-facing website sections.",
+    "Focused on responsive design, visual hierarchy, and clear product messaging.",
+  ],
+
+  overview:
+    "Eligido had a complex Web3 product vision involving behavioral advertising, opt-in and opt-out data sharing, partner communities, digitized incentives, and future blockchain-enabled reward systems. The challenge was turning that technical business concept into a landing page that people could understand quickly without needing to read the full white paper or investor materials.",
+
+  techStack: ["React", "JavaScript", "HTML", "CSS", "Responsive Design"],
+
+  libraries: [
+    {
+      name: "React",
+      description:
+        "Used to build the landing page as a component-based frontend with reusable sections and a scalable page structure.",
+    },
+    {
+      name: "JavaScript",
+      description:
+        "Used for frontend behavior, page interaction logic, and supporting dynamic user interface pieces.",
+    },
+    {
+      name: "HTML / CSS",
+      description:
+        "Used to structure the page content and style the landing page with responsive layouts, spacing, and visual hierarchy.",
+    },
+  ],
+
+  whatIBuilt: [
+    "Built the public-facing landing page for Eligido using React.",
+    "Structured complex startup documentation into clearer user-facing website sections.",
+    "Created responsive page layouts that worked across desktop and mobile screen sizes.",
+    "Helped communicate Eligido’s product vision around personalization, data sharing, partner ecosystems, and digital incentives.",
+    "Focused on making the product easier to understand for users, partners, and stakeholders.",
+  ],
+
+  engineeringDecisions: [
+    "Used a section-based page structure so the startup’s product story could be broken into digestible parts.",
+    "Focused on visual hierarchy to make the most important product ideas easier to scan.",
+    "Kept the project scoped to the public landing page instead of overclaiming full Web3 platform development.",
+    "Prioritized clear messaging and responsive layout because the product concept was complex and early-stage.",
+  ],
+
+  challenges: [
+    "The product vision included several overlapping ideas, including behavioral advertising, privacy, partner communities, incentives, and future blockchain rewards.",
+    "The main challenge was turning technical and business-heavy documentation into a website that felt clear and approachable.",
+    "The landing page needed to explain the idea without overwhelming users with too much startup or Web3 terminology.",
+  ],
+
+  results: [
+    "Delivered a public-facing React landing page for an early-stage startup.",
+    "Helped turn complex white paper and investor deck material into a clearer product narrative.",
+    "Improved the startup’s ability to explain its vision to users, partners, and stakeholders.",
+  ],
+
+  limitations: [
+    "My work focused on the landing page and frontend presentation, not the full Web3 platform or blockchain infrastructure.",
+    "The project was built around early-stage startup requirements, so the product messaging and direction could continue to evolve.",
+  ],
+
+  nextSteps: [
+    "Add stronger product visuals and interactive sections as the startup’s platform becomes more defined.",
+    "Improve conversion-focused sections such as calls to action, partner explanations, and product walkthroughs.",
+    "Continue refining the messaging as the company’s technical implementation and user flows mature.",
+  ],
+
+  links: [
+    {
+      label: "Live Site",
+      href: "https://eligido.com/",
+      type: "demo",
+    },
+  ],
+  thumbnail: "/projects/eligido/thumbnail.png",
   featured: true,
 },
   {
@@ -382,6 +472,7 @@ export const projects: Project[] = [
     },
     
   ],
+  thumbnail: "/projects/coveytown/thumbnail.png",
   featured: true,
 },
   {
@@ -520,6 +611,7 @@ export const projects: Project[] = [
     type: "github",
   },
   ],
+  thumbnail: "/projects/nyc-aquatics/thumbnail.png",
   featured: true,
 },
 ];

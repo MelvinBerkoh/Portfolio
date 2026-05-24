@@ -65,10 +65,10 @@ const workHabits = [
 const stats = [
   {
     value: "3rd Overall",
-    label: "Senior Capstone Project",
+    label: "Senior Capstone Showcase",
   },
   {
-    value: "3",
+    value: "4",
     label: "Featured Case Studies",
   },
   {
@@ -263,7 +263,7 @@ export function HomePage() {
                 </p>
                 <p>
                   PolicyScope, an AI-assisted Chrome extension that placed 3rd
-                  overall in a capstone showcase.
+                  overall in a senior capstone showcase.
                 </p>
               </div>
             </CardContent>
@@ -285,79 +285,103 @@ export function HomePage() {
       </section>
 
       <section id="projects" className="mx-auto max-w-6xl px-6 py-16">
-        <div className="mb-8 max-w-2xl space-y-3">
+        <div className="mb-8 max-w-3xl space-y-3">
           <Badge variant="outline">Featured Work</Badge>
-          <h2 className="text-3xl font-bold tracking-tight">Projects</h2>
+          <h2 className="text-3xl font-bold tracking-tight">Case studies</h2>
           <p className="text-muted-foreground">
-            These projects show practical software engineering experience across
-            frontend development, full-stack integration, browser extensions, AI
-            tooling, multiplayer systems, and machine learning.
+            A focused look at the projects that best show my software
+            engineering experience across AI tooling, frontend development,
+            browser extensions, multiplayer systems, and data science.
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="space-y-5">
           {featuredProjects.map((project, index) => {
-            const previewImage = project.screenshots?.[0]?.src;
-
+              const previewImage = project.thumbnail ?? project.screenshots?.[0]?.src;
             return (
               <motion.div
                 key={project.slug}
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.35, delay: index * 0.08 }}
+                transition={{ duration: 0.35, delay: index * 0.06 }}
               >
-                <Card className="group flex h-full flex-col overflow-hidden transition hover:-translate-y-1 hover:shadow-xl">
-                  <div className="relative h-48 overflow-hidden border-b bg-muted">
-                    {previewImage ? (
-                      <Image
-                        src={previewImage}
-                        alt={`${project.title} preview`}
-                        fill
-                        className="object-cover object-top transition duration-500 group-hover:scale-105"
-                      />
-                    ) : (
-                      <div className="h-full w-full bg-gradient-to-br from-muted to-background" />
-                    )}
+                <Card className="group overflow-hidden bg-card/85 backdrop-blur transition hover:-translate-y-1 hover:shadow-lg">
+                  <CardContent className="p-0">
+                    <div className="grid gap-0 md:grid-cols-[260px_1fr]">
+                      <div className="relative min-h-44 overflow-hidden border-b bg-muted md:min-h-full md:border-b-0 md:border-r">
+                        {previewImage ? (
+                          <Image
+                            src={previewImage}
+                            alt={`${project.title} preview`}
+                            fill
+                            className="object-cover object-center transition duration-500 group-hover:scale-105"                          />
+                        ) : (
+                          <div className="flex h-full min-h-44 flex-col justify-between bg-gradient-to-br from-muted via-muted/60 to-background p-5">
+                            <Badge variant="secondary" className="w-fit">
+                              Case Study
+                            </Badge>
+                            <div>
+                              <p className="text-lg font-semibold">
+                                {project.title}
+                              </p>
+                              <p className="mt-2 text-sm text-muted-foreground">
+                                {project.category}
+                              </p>
+                            </div>
+                          </div>
+                        )}
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
-                  </div>
+                        {previewImage && (
+                          <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
+                        )}
+                      </div>
 
-                  <CardHeader className="space-y-3">
-                    <Badge variant="secondary" className="w-fit">
-                      {project.category}
-                    </Badge>
+                      <div className="space-y-4 p-5 md:p-6">
+                        <div className="flex flex-wrap items-start justify-between gap-3">
+                          <div className="space-y-2">
+                            <Badge variant="secondary" className="w-fit">
+                              {project.category}
+                            </Badge>
 
-                    <CardTitle className="leading-tight">
-                      {project.title}
-                    </CardTitle>
-                  </CardHeader>
+                            <h3 className="text-2xl font-semibold tracking-tight">
+                              {project.title}
+                            </h3>
+                          </div>
 
-                  <CardContent className="flex flex-1 flex-col gap-5">
-                    <p className="text-sm leading-6 text-muted-foreground">
-                      {project.summary}
-                    </p>
+                          <span className="rounded-full border px-3 py-1 text-xs text-muted-foreground">
+                            0{index + 1}
+                          </span>
+                        </div>
 
-                    <p className="text-sm font-medium">{project.impact}</p>
+                        <p className="max-w-3xl text-sm leading-6 text-muted-foreground">
+                          {project.summary}
+                        </p>
 
-                    <div className="flex flex-wrap gap-2">
-                      {project.tech.slice(0, 5).map((item) => (
-                        <Badge key={item} variant="outline">
-                          {item}
-                        </Badge>
-                      ))}
+                        <p className="max-w-3xl text-sm font-medium leading-6">
+                          {project.impact}
+                        </p>
+
+                        <div className="flex flex-wrap gap-2">
+                          {project.tech.slice(0, 5).map((item) => (
+                            <Badge key={item} variant="outline">
+                              {item}
+                            </Badge>
+                          ))}
+                        </div>
+
+                        <Button
+                          asChild
+                          variant="outline"
+                          className="group/button"
+                        >
+                          <Link href={`/projects/${project.slug}`}>
+                            View Case Study
+                            <ArrowUpRight className="ml-2 h-4 w-4 transition group-hover/button:translate-x-0.5 group-hover/button:-translate-y-0.5" />
+                          </Link>
+                        </Button>
+                      </div>
                     </div>
-
-                    <Button
-                      asChild
-                      variant="outline"
-                      className="mt-auto group/button"
-                    >
-                      <Link href={`/projects/${project.slug}`}>
-                        View Case Study
-                        <ArrowUpRight className="ml-2 h-4 w-4 transition group-hover/button:translate-x-0.5 group-hover/button:-translate-y-0.5" />
-                      </Link>
-                    </Button>
                   </CardContent>
                 </Card>
               </motion.div>
