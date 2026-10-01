@@ -3,14 +3,14 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 
-import { projects } from "@/data/projects";
+import { portfolioProjects } from "@/data/portfolio-projects";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
 export function generateStaticParams() {
-  return projects.map((project) => ({
+  return portfolioProjects.map((project) => ({
     slug: project.slug,
   }));
 }
@@ -46,6 +46,18 @@ function BulletList({ items }: { items: string[] }) {
 }
 
 function getProjectStatus(slug: string) {
+  if (slug === "opsdesk") {
+    return "Full-Stack SaaS Project";
+  }
+
+  if (slug === "application-tracker") {
+    return "Deployed Full-Stack Application";
+  }
+
+  if (slug === "commerce-pulse") {
+    return "End-to-End Analytics Project";
+  }
+
   if (slug === "policyscope") {
     return "Local Chrome Extension Prototype";
   }
@@ -67,7 +79,7 @@ export default async function ProjectPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const project = projects.find((item) => item.slug === slug);
+  const project = portfolioProjects.find((item) => item.slug === slug);
 
   if (!project) {
     notFound();
