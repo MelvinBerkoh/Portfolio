@@ -1,6 +1,8 @@
+import { AboutSection } from "@/components/home/redesign/about-section";
 import { AdditionalWorkSection } from "@/components/home/redesign/additional-work-section";
 import { ApplicationTrackerShowcase } from "@/components/home/redesign/application-tracker-showcase";
 import { CommercePulseShowcase } from "@/components/home/redesign/commerce-pulse-showcase";
+import { ContactSection } from "@/components/home/redesign/contact-section";
 import { CustomCursor } from "@/components/home/redesign/custom-cursor";
 import { HeroSection } from "@/components/home/redesign/hero-section";
 import { InteractiveBackground } from "@/components/home/redesign/interactive-background";
@@ -26,6 +28,8 @@ export default function RedesignPreviewPage() {
         <JourneySection />
         <SkillsSection />
         <AdditionalWorkSection />
+        <AboutSection />
+        <ContactSection />
       </div>
     </main>
   );

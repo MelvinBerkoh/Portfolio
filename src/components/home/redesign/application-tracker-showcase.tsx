@@ -12,6 +12,7 @@ import {
 import { motion } from "motion/react";
 
 import { ProjectConsole } from "@/components/home/redesign/project-console";
+import { ThinkingShimmerText } from "@/components/home/redesign/thinking-shimmer-text";
 
 const proofPoints = [
   {
@@ -41,7 +42,8 @@ const consoleLines = [
   },
   {
     command: "purpose",
-    output: "Keep a job search in one system.",
+    output:
+      "Keep a job search in one system.",
   },
   {
     command: "workflow",
@@ -62,7 +64,8 @@ const consoleLines = [
 const systemSteps = [
   {
     label: "Auth",
-    detail: "Clerk identifies the signed-in user.",
+    detail:
+      "Clerk identifies the signed-in user.",
   },
   {
     label: "Ownership",
@@ -124,7 +127,11 @@ export function ApplicationTrackerShowcase() {
                   <motion.span
                     animate={{
                       scale: [1, 1.8, 1],
-                      opacity: [0.35, 0, 0.35],
+                      opacity: [
+                        0.35,
+                        0,
+                        0.35,
+                      ],
                     }}
                     transition={{
                       duration: 2.8,
@@ -142,7 +149,12 @@ export function ApplicationTrackerShowcase() {
             </div>
 
             <h3 className="mt-6 text-5xl font-semibold tracking-[-0.045em] sm:text-6xl">
-              Application Tracker
+              <ThinkingShimmerText
+                delay={1.1}
+                repeatDelay={5.4}
+              >
+                Application Tracker
+              </ThinkingShimmerText>
             </h3>
 
             <p className="mt-5 max-w-xl text-lg leading-8 text-muted-foreground">
@@ -158,43 +170,50 @@ export function ApplicationTrackerShowcase() {
             </p>
 
             <div className="mt-9 space-y-5">
-              {proofPoints.map((item, index) => {
-                const Icon = item.icon;
+              {proofPoints.map(
+                (item, index) => {
+                  const Icon = item.icon;
 
-                return (
-                  <motion.div
-                    key={item.title}
-                    initial={{
-                      opacity: 0,
-                      x: 12,
-                    }}
-                    whileInView={{
-                      opacity: 1,
-                      x: 0,
-                    }}
-                    viewport={{ once: true }}
-                    transition={{
-                      duration: 0.35,
-                      delay: index * 0.08,
-                    }}
-                    className="flex items-start gap-4"
-                  >
-                    <div className="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand/10 text-brand">
-                      <Icon className="h-4 w-4" />
-                    </div>
+                  return (
+                    <motion.div
+                      key={item.title}
+                      initial={{
+                        opacity: 0,
+                        x: 12,
+                      }}
+                      whileInView={{
+                        opacity: 1,
+                        x: 0,
+                      }}
+                      viewport={{
+                        once: true,
+                      }}
+                      transition={{
+                        duration: 0.35,
+                        delay:
+                          index * 0.08,
+                      }}
+                      className="flex items-start gap-4"
+                    >
+                      <div className="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand/10 text-brand">
+                        <Icon className="h-4 w-4" />
+                      </div>
 
-                    <div>
-                      <p className="font-semibold">
-                        {item.title}
-                      </p>
+                      <div>
+                        <p className="font-semibold">
+                          {item.title}
+                        </p>
 
-                      <p className="mt-1 max-w-md text-sm leading-6 text-muted-foreground">
-                        {item.description}
-                      </p>
-                    </div>
-                  </motion.div>
-                );
-              })}
+                        <p className="mt-1 max-w-md text-sm leading-6 text-muted-foreground">
+                          {
+                            item.description
+                          }
+                        </p>
+                      </div>
+                    </motion.div>
+                  );
+                },
+              )}
             </div>
 
             <div className="mt-10 flex flex-wrap gap-3">

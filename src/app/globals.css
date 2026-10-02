@@ -83,6 +83,13 @@
   --brand-glow: oklch(0.58 0.19 255 / 0.12);
   --cursor-glow: rgba(37, 99, 235, 0.45);
 
+  --sword-shine: rgba(59, 130, 246, 0.95);
+  --sword-shine-soft: rgba(96, 165, 250, 0.24);
+
+  --silver-shine: rgba(255, 255, 255, 0.98);
+  --silver-shine-mid: rgba(226, 232, 240, 0.92);
+  --silver-shine-soft: rgba(203, 213, 225, 0.26);
+
   --radius: 0.75rem;
 }
 
@@ -120,6 +127,13 @@
   --grid-dot: oklch(0.72 0.08 255 / 0.1);
   --brand-glow: oklch(0.62 0.18 255 / 0.14);
   --cursor-glow: rgba(96, 165, 250, 0.55);
+
+  --sword-shine: rgba(96, 165, 250, 0.98);
+  --sword-shine-soft: rgba(96, 165, 250, 0.24);
+
+  --silver-shine: rgba(255, 255, 255, 1);
+  --silver-shine-mid: rgba(226, 232, 240, 0.96);
+  --silver-shine-soft: rgba(226, 232, 240, 0.3);
 }
 
 html {
@@ -162,6 +176,171 @@ body {
   color: transparent;
 }
 
+.rotating-word-gradient {
+  background: linear-gradient(
+    100deg,
+    color-mix(
+        in oklab,
+        var(--brand) 68%,
+        var(--foreground)
+      )
+      0%,
+    var(--brand) 100%
+  );
+  background-clip: text;
+  color: transparent;
+}
+
+/* Blue brand glint */
+.sword-shine {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.sword-shine::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  z-index: 20;
+  top: -45%;
+  bottom: -45%;
+  left: -35%;
+  width: 18%;
+  opacity: 0;
+  transform: translateX(-180%) rotate(18deg);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--sword-shine-soft) 28%,
+    var(--sword-shine) 50%,
+    var(--sword-shine-soft) 72%,
+    transparent 100%
+  );
+  filter: blur(0.5px);
+}
+
+.sword-shine:hover::after,
+.sword-shine:focus-visible::after {
+  animation: sword-shine-sweep 720ms
+    cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Premium silver blade flash */
+.sword-shine-silver {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.sword-shine-silver::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  z-index: 30;
+  top: -70%;
+  bottom: -70%;
+  left: -32%;
+  width: 12%;
+  opacity: 0;
+  transform: translateX(-220%) rotate(19deg);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--silver-shine-soft) 24%,
+    var(--silver-shine-mid) 43%,
+    var(--silver-shine) 50%,
+    var(--silver-shine-mid) 57%,
+    var(--silver-shine-soft) 76%,
+    transparent 100%
+  );
+  filter: blur(0.35px);
+  box-shadow:
+    0 0 10px var(--silver-shine-soft),
+    0 0 24px var(--silver-shine-soft);
+}
+
+.sword-shine-silver:hover::after,
+.sword-shine-silver:focus-visible::after {
+  animation: silver-sword-shine-sweep 620ms
+    cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-progress-shine {
+  box-shadow:
+    0 0 8px var(--sword-shine-soft),
+    0 0 14px var(--brand-glow);
+}
+
+.nav-progress-shine::after {
+  content: "";
+  position: absolute;
+  right: -3px;
+  top: 50%;
+  height: 7px;
+  width: 7px;
+  transform: translateY(-50%) rotate(45deg);
+  background: var(--sword-shine);
+  box-shadow:
+    0 0 7px var(--sword-shine),
+    0 0 16px var(--sword-shine-soft);
+}
+
+@keyframes sword-shine-sweep {
+  0% {
+    opacity: 0;
+    transform: translateX(-180%)
+      rotate(18deg);
+  }
+
+  20% {
+    opacity: 0.9;
+  }
+
+  55% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(800%)
+      rotate(18deg);
+  }
+}
+
+@keyframes silver-sword-shine-sweep {
+  0% {
+    opacity: 0;
+    transform: translateX(-220%)
+      rotate(19deg);
+  }
+
+  18% {
+    opacity: 0.7;
+  }
+
+  42% {
+    opacity: 1;
+  }
+
+  58% {
+    opacity: 0.95;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(950%)
+      rotate(19deg);
+  }
+}
+
+@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  html.custom-cursor-active,
+  html.custom-cursor-active * {
+    cursor: none !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -189,19 +368,4 @@ body {
   body {
     @apply bg-background font-sans text-foreground antialiased;
   }
-}
-@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  html.custom-cursor-active,
-  html.custom-cursor-active * {
-    cursor: none !important;
-  }
-}
-.rotating-word-gradient {
-  background: linear-gradient(
-    100deg,
-    color-mix(in oklab, var(--brand) 68%, var(--foreground)) 0%,
-    var(--brand) 100%
-  );
-  background-clip: text;
-  color: transparent;
 }

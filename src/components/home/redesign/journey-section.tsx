@@ -22,24 +22,33 @@ import {
   useRef,
 } from "react";
 
+import { ThinkingShimmerText } from "@/components/home/redesign/thinking-shimmer-text";
+
 type JourneyMilestone = {
   period: string;
   eyebrow: string;
   title: string;
   description: string;
   skills: string[];
-  icon: ComponentType<SVGProps<SVGSVGElement>>;
+  icon: ComponentType<
+    SVGProps<SVGSVGElement>
+  >;
   returnEngagement?: boolean;
 };
 
 const milestones: JourneyMilestone[] = [
   {
     period: "Summer 2023",
-    eyebrow: "First industry experience",
+    eyebrow:
+      "First industry experience",
     title: "Mendham Township",
     description:
       "Worked as a Website & Forms Intern on real municipal systems. I redesigned CivicPlus pages, built forms, worked with analytics and documented workflows for staff.",
-    skills: ["CivicPlus", "Forms", "Analytics"],
+    skills: [
+      "CivicPlus",
+      "Forms",
+      "Analytics",
+    ],
     icon: BriefcaseBusiness,
   },
   {
@@ -48,7 +57,11 @@ const milestones: JourneyMilestone[] = [
     title: "Eligido",
     description:
       "Joined Eligido as a frontend intern and built its public-facing React landing page. I turned complex startup material into a responsive site that was easier for users and stakeholders to understand.",
-    skills: ["React", "Responsive UI", "Product Messaging"],
+    skills: [
+      "React",
+      "Responsive UI",
+      "Product Messaging",
+    ],
     icon: Code2,
   },
   {
@@ -57,7 +70,11 @@ const milestones: JourneyMilestone[] = [
     title: "Graduated from NJIT",
     description:
       "Finished my B.S. in Computer Science. PolicyScope placed 3rd overall in the senior capstone showcase, where I focused on clause detection and backend functionality.",
-    skills: ["Computer Science", "PolicyScope", "3rd Overall"],
+    skills: [
+      "Computer Science",
+      "PolicyScope",
+      "3rd Overall",
+    ],
     icon: GraduationCap,
   },
   {
@@ -66,17 +83,26 @@ const milestones: JourneyMilestone[] = [
     title: "Back at Eligido",
     description:
       "After my internship, Eligido brought me back as a paid Frontend & Trust Layer Engineer. My work expanded into frontend architecture, interaction flows, accessibility and the Stage 1 product experience.",
-    skills: ["Frontend Architecture", "Trust Layer", "Accessibility"],
+    skills: [
+      "Frontend Architecture",
+      "Trust Layer",
+      "Accessibility",
+    ],
     icon: RefreshCw,
     returnEngagement: true,
   },
   {
     period: "August 2026",
-    eyebrow: "Independent product build",
+    eyebrow:
+      "Independent product build",
     title: "Application Tracker",
     description:
       "Built a multi-user job search app with authentication, relational data, interviews, follow-ups and job-post imports. It became a product I could use during my own job search.",
-    skills: ["Next.js", "PostgreSQL", "Clerk"],
+    skills: [
+      "Next.js",
+      "PostgreSQL",
+      "Clerk",
+    ],
     icon: Database,
   },
   {
@@ -85,7 +111,11 @@ const milestones: JourneyMilestone[] = [
     title: "OpsDesk",
     description:
       "Pushed deeper into backend architecture with multi-tenant workspaces, server-side RBAC, incident escalation and SLA logic. System boundaries became a bigger part of how I designed software.",
-    skills: ["Multi-tenant", "RBAC", "SLA Logic"],
+    skills: [
+      "Multi-tenant",
+      "RBAC",
+      "SLA Logic",
+    ],
     icon: ShieldCheck,
   },
   {
@@ -94,7 +124,11 @@ const milestones: JourneyMilestone[] = [
     title: "CommercePulse",
     description:
       "Built an analytics pipeline from raw CSV files to PostgreSQL, dbt models, SQL analysis and Tableau dashboards. It brought the same end-to-end mindset into data engineering.",
-    skills: ["Python", "dbt", "Tableau"],
+    skills: [
+      "Python",
+      "dbt",
+      "Tableau",
+    ],
     icon: BarChart3,
   },
 ];
@@ -108,13 +142,15 @@ function Milestone({
   milestone,
   index,
 }: MilestoneProps) {
-  const itemRef = useRef<HTMLDivElement>(null);
+  const itemRef =
+    useRef<HTMLDivElement>(null);
 
   const isActive = useInView(itemRef, {
     margin: "-38% 0px -38% 0px",
   });
 
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion =
+    useReducedMotion();
 
   const isLeft = index % 2 === 0;
 
@@ -131,7 +167,9 @@ function Milestone({
             ? false
             : {
                 opacity: 0,
-                x: isLeft ? -32 : 32,
+                x: isLeft
+                  ? -32
+                  : 32,
                 y: 12,
               }
         }
@@ -145,8 +183,16 @@ function Milestone({
           margin: "-100px",
         }}
         transition={{
-          duration: shouldReduceMotion ? 0 : 0.5,
-          ease: [0.22, 1, 0.36, 1],
+          duration:
+            shouldReduceMotion
+              ? 0
+              : 0.5,
+          ease: [
+            0.22,
+            1,
+            0.36,
+            1,
+          ],
         }}
         className={`col-start-2 row-start-1 ${
           isLeft
@@ -163,7 +209,8 @@ function Milestone({
         >
           <motion.div
             animate={{
-              opacity: isActive ? 1 : 0,
+              opacity:
+                isActive ? 1 : 0,
             }}
             transition={{
               duration: 0.35,
@@ -189,7 +236,9 @@ function Milestone({
                         opacity: 1,
                         scale: 1,
                       }}
-                      viewport={{ once: true }}
+                      viewport={{
+                        once: true,
+                      }}
                       transition={{
                         duration: 0.35,
                         delay: 0.2,
@@ -203,7 +252,9 @@ function Milestone({
                 </div>
 
                 <p className="mt-1 text-[11px] font-medium uppercase tracking-[0.16em] text-muted-foreground">
-                  {milestone.eyebrow}
+                  {
+                    milestone.eyebrow
+                  }
                 </p>
               </div>
 
@@ -223,20 +274,29 @@ function Milestone({
             </h3>
 
             <p className="mt-4 max-w-xl text-sm leading-7 text-muted-foreground sm:text-base">
-              {milestone.description}
+              {
+                milestone.description
+              }
             </p>
 
             <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-muted-foreground">
               {milestone.skills.map(
-                (skill, skillIndex) => (
+                (
+                  skill,
+                  skillIndex,
+                ) => (
                   <div
                     key={skill}
                     className="flex items-center gap-3"
                   >
-                    <span>{skill}</span>
+                    <span>
+                      {skill}
+                    </span>
 
                     {skillIndex <
-                      milestone.skills.length - 1 && (
+                      milestone.skills
+                        .length -
+                        1 && (
                       <span
                         aria-hidden="true"
                         className="h-1 w-1 rounded-full bg-brand/50"
@@ -253,44 +313,62 @@ function Milestone({
       <div className="relative z-20 col-start-1 row-start-1 flex h-full items-center justify-center lg:col-start-2">
         <motion.div
           animate={{
-            scale: isActive ? 1.14 : 1,
+            scale:
+              isActive ? 1.14 : 1,
           }}
           transition={{
             duration: 0.3,
-            ease: [0.22, 1, 0.36, 1],
+            ease: [
+              0.22,
+              1,
+              0.36,
+              1,
+            ],
           }}
           className="relative flex h-8 w-8 items-center justify-center"
         >
-          {isActive && !shouldReduceMotion && (
-            <motion.span
-              initial={{
-                opacity: 0.4,
-                scale: 1,
-              }}
-              animate={{
-                opacity: [0.4, 0, 0.4],
-                scale: [1, 1.8, 1],
-              }}
-              transition={{
-                duration: 2.2,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="absolute h-5 w-5 rounded-full bg-brand/30"
-            />
-          )}
+          {isActive &&
+            !shouldReduceMotion && (
+              <motion.span
+                initial={{
+                  opacity: 0.4,
+                  scale: 1,
+                }}
+                animate={{
+                  opacity: [
+                    0.4,
+                    0,
+                    0.4,
+                  ],
+                  scale: [
+                    1,
+                    1.8,
+                    1,
+                  ],
+                }}
+                transition={{
+                  duration: 2.2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="absolute h-5 w-5 rounded-full bg-brand/30"
+              />
+            )}
 
           <motion.span
             animate={{
-              backgroundColor: isActive
-                ? "var(--brand)"
-                : "var(--background)",
-              borderColor: isActive
-                ? "var(--brand)"
-                : "var(--border)",
-              boxShadow: isActive
-                ? "0 0 0 5px var(--brand-glow)"
-                : "0 0 0 0 transparent",
+              backgroundColor:
+                isActive
+                  ? "var(--brand)"
+                  : "var(--background)",
+              borderColor:
+                isActive
+                  ? "var(--brand)"
+                  : "var(--border)",
+              boxShadow:
+                isActive
+                  ? "0 0 0 5px var(--brand-glow)"
+                  : "0 0 0 0 transparent",
             }}
             transition={{
               duration: 0.3,
@@ -304,20 +382,29 @@ function Milestone({
 }
 
 export function JourneySection() {
-  const timelineRef = useRef<HTMLDivElement>(null);
+  const timelineRef =
+    useRef<HTMLDivElement>(null);
 
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion =
+    useReducedMotion();
 
-  const { scrollYProgress } = useScroll({
-    target: timelineRef,
-    offset: ["start 68%", "end 62%"],
-  });
+  const { scrollYProgress } =
+    useScroll({
+      target: timelineRef,
+      offset: [
+        "start 68%",
+        "end 62%",
+      ],
+    });
 
-  const progress = useSpring(scrollYProgress, {
-    stiffness: 90,
-    damping: 24,
-    mass: 0.35,
-  });
+  const progress = useSpring(
+    scrollYProgress,
+    {
+      stiffness: 90,
+      damping: 24,
+      mass: 0.35,
+    },
+  );
 
   return (
     <section
@@ -352,8 +439,10 @@ export function JourneySection() {
           </h2>
 
           <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
-            Each step gave me more responsibility. I went from
-            building pages to owning product flows, system logic
+            Each step gave me more
+            responsibility. I went from
+            building pages to owning
+            product flows, system logic
             and data.
           </p>
         </motion.div>
@@ -370,20 +459,28 @@ export function JourneySection() {
           <motion.div
             aria-hidden="true"
             style={{
-              scaleY: shouldReduceMotion
-                ? 1
-                : progress,
+              scaleY:
+                shouldReduceMotion
+                  ? 1
+                  : progress,
             }}
             className="absolute bottom-7 left-[20px] top-7 w-px origin-top -translate-x-1/2 bg-brand shadow-[0_0_14px_var(--brand-glow)] lg:left-1/2"
           />
 
-          {milestones.map((milestone, index) => (
-            <Milestone
-              key={`${milestone.period}-${milestone.title}`}
-              milestone={milestone}
-              index={index}
-            />
-          ))}
+          {milestones.map(
+            (
+              milestone,
+              index,
+            ) => (
+              <Milestone
+                key={`${milestone.period}-${milestone.title}`}
+                milestone={
+                  milestone
+                }
+                index={index}
+              />
+            ),
+          )}
 
           <div className="relative grid grid-cols-[42px_minmax(0,1fr)] pt-4 lg:grid-cols-[minmax(0,1fr)_80px_minmax(0,1fr)]">
             <div className="relative z-20 col-start-1 flex justify-center lg:col-start-2">
@@ -391,12 +488,21 @@ export function JourneySection() {
                 {!shouldReduceMotion && (
                   <motion.span
                     animate={{
-                      opacity: [0.4, 0, 0.4],
-                      scale: [1, 1.9, 1],
+                      opacity: [
+                        0.4,
+                        0,
+                        0.4,
+                      ],
+                      scale: [
+                        1,
+                        1.9,
+                        1,
+                      ],
                     }}
                     transition={{
                       duration: 2.4,
-                      repeat: Infinity,
+                      repeat:
+                        Infinity,
                       ease: "easeInOut",
                     }}
                     className="absolute h-5 w-5 rounded-full bg-brand/30"
@@ -422,7 +528,12 @@ export function JourneySection() {
               className="col-start-2 row-start-1 self-center lg:col-start-3"
             >
               <p className="font-mono text-xs font-semibold text-brand">
-                NOW
+                <ThinkingShimmerText
+                  delay={0.6}
+                  repeatDelay={5.8}
+                >
+                  NOW
+                </ThinkingShimmerText>
               </p>
 
               <p className="mt-1 text-sm text-muted-foreground">

@@ -21,6 +21,8 @@ import {
   useState,
 } from "react";
 
+import { ThinkingShimmerText } from "@/components/home/redesign/thinking-shimmer-text";
+
 const categories = [
   {
     name: "Data Collection",
@@ -53,7 +55,8 @@ export function PolicyScopeShowcase() {
     margin: "-120px",
   });
 
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion =
+    useReducedMotion();
 
   const [phase, setPhase] = useState(0);
 
@@ -69,10 +72,22 @@ export function PolicyScopeShowcase() {
     startedRef.current = true;
 
     const timers = [
-      window.setTimeout(() => setPhase(1), 450),
-      window.setTimeout(() => setPhase(2), 1600),
-      window.setTimeout(() => setPhase(3), 2450),
-      window.setTimeout(() => setPhase(4), 3300),
+      window.setTimeout(
+        () => setPhase(1),
+        450,
+      ),
+      window.setTimeout(
+        () => setPhase(2),
+        1600,
+      ),
+      window.setTimeout(
+        () => setPhase(3),
+        2450,
+      ),
+      window.setTimeout(
+        () => setPhase(4),
+        3300,
+      ),
     ];
 
     return () => {
@@ -80,9 +95,13 @@ export function PolicyScopeShowcase() {
         window.clearTimeout(timer);
       });
     };
-  }, [isInView, shouldReduceMotion]);
+  }, [
+    isInView,
+    shouldReduceMotion,
+  ]);
 
-  const visiblePhase = shouldReduceMotion ? 4 : phase;
+  const visiblePhase =
+    shouldReduceMotion ? 4 : phase;
 
   const detectionCount =
     visiblePhase < 2
@@ -117,12 +136,15 @@ export function PolicyScopeShowcase() {
           </p>
 
           <h2 className="mt-4 text-4xl font-semibold tracking-[-0.035em] sm:text-5xl lg:text-6xl">
-            Different problems need different tools.
+            Different problems need
+            different tools.
           </h2>
 
           <p className="mt-5 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
-            These projects pushed me outside a normal full-stack app.
-            PolicyScope started inside the browser.
+            These projects pushed me
+            outside a normal full-stack
+            app. PolicyScope started
+            inside the browser.
           </p>
         </motion.div>
 
@@ -142,7 +164,12 @@ export function PolicyScopeShowcase() {
             }}
             transition={{
               duration: 0.55,
-              ease: [0.22, 1, 0.36, 1],
+              ease: [
+                0.22,
+                1,
+                0.36,
+                1,
+              ],
             }}
           >
             <div className="flex flex-wrap items-center gap-3">
@@ -152,7 +179,13 @@ export function PolicyScopeShowcase() {
 
               <span className="inline-flex items-center gap-2 rounded-full border border-amber-500/25 bg-amber-500/10 px-3 py-1 text-xs font-medium text-amber-700 dark:text-amber-300">
                 <Award className="h-3.5 w-3.5" />
-                3rd Overall · NJIT Capstone
+
+                <ThinkingShimmerText
+                  delay={0.7}
+                  repeatDelay={3.5}
+                >
+                  3rd Overall · NJIT Capstone
+                </ThinkingShimmerText>
               </span>
             </div>
 
@@ -161,14 +194,19 @@ export function PolicyScopeShowcase() {
             </h3>
 
             <p className="mt-5 max-w-xl text-lg leading-8 text-muted-foreground">
-              A Chrome extension that finds important policy clauses
-              before you agree to them.
+              A Chrome extension that
+              finds important policy
+              clauses before you agree to
+              them.
             </p>
 
             <p className="mt-5 max-w-xl leading-7 text-muted-foreground">
-              PolicyScope scans Terms of Service and Privacy Policy
-              pages. It groups detected clauses by category and
-              highlights them on the page. Users can also request a
+              PolicyScope scans Terms of
+              Service and Privacy Policy
+              pages. It groups detected
+              clauses by category and
+              highlights them on the page.
+              Users can also request a
               plain-English explanation.
             </p>
 
@@ -182,7 +220,9 @@ export function PolicyScopeShowcase() {
                   opacity: 1,
                   x: 0,
                 }}
-                viewport={{ once: true }}
+                viewport={{
+                  once: true,
+                }}
                 className="flex items-start gap-4"
               >
                 <div className="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand/10 text-brand">
@@ -195,8 +235,9 @@ export function PolicyScopeShowcase() {
                   </p>
 
                   <p className="mt-1 max-w-md text-sm leading-6 text-muted-foreground">
-                    Rule-based detection keeps the main scan fast and
-                    predictable.
+                    Rule-based detection
+                    keeps the main scan
+                    fast and predictable.
                   </p>
                 </div>
               </motion.div>
@@ -210,7 +251,9 @@ export function PolicyScopeShowcase() {
                   opacity: 1,
                   x: 0,
                 }}
-                viewport={{ once: true }}
+                viewport={{
+                  once: true,
+                }}
                 transition={{
                   delay: 0.08,
                 }}
@@ -226,8 +269,11 @@ export function PolicyScopeShowcase() {
                   </p>
 
                   <p className="mt-1 max-w-md text-sm leading-6 text-muted-foreground">
-                    AI requests go through a Node and Express backend.
-                    The API key stays out of the extension.
+                    AI requests go through
+                    a Node and Express
+                    backend. The API key
+                    stays out of the
+                    extension.
                   </p>
                 </div>
               </motion.div>
@@ -241,7 +287,9 @@ export function PolicyScopeShowcase() {
                   opacity: 1,
                   x: 0,
                 }}
-                viewport={{ once: true }}
+                viewport={{
+                  once: true,
+                }}
                 transition={{
                   delay: 0.16,
                 }}
@@ -253,12 +301,15 @@ export function PolicyScopeShowcase() {
 
                 <div>
                   <p className="font-semibold">
-                    Plain-English explanations
+                    Plain-English
+                    explanations
                   </p>
 
                   <p className="mt-1 max-w-md text-sm leading-6 text-muted-foreground">
-                    AI is used on demand. It is not required for the
-                    main detection pipeline.
+                    AI is used on demand.
+                    It is not required for
+                    the main detection
+                    pipeline.
                   </p>
                 </div>
               </motion.div>
@@ -315,7 +366,12 @@ export function PolicyScopeShowcase() {
             }}
             transition={{
               duration: 0.6,
-              ease: [0.22, 1, 0.36, 1],
+              ease: [
+                0.22,
+                1,
+                0.36,
+                1,
+              ],
             }}
             className="overflow-hidden rounded-3xl border bg-card/90 shadow-2xl shadow-black/10 backdrop-blur-xl dark:shadow-black/30"
           >
@@ -339,23 +395,29 @@ export function PolicyScopeShowcase() {
 
             <div className="grid min-h-[600px] lg:grid-cols-[1fr_300px]">
               <div className="relative overflow-hidden bg-background/60 p-6 sm:p-8">
-                {visiblePhase >= 1 && visiblePhase < 3 && (
-                  <motion.div
-                    initial={{
-                      top: "10%",
-                      opacity: 0,
-                    }}
-                    animate={{
-                      top: "82%",
-                      opacity: [0, 1, 1, 0],
-                    }}
-                    transition={{
-                      duration: 1.5,
-                      ease: "easeInOut",
-                    }}
-                    className="pointer-events-none absolute left-0 right-0 z-20 h-px bg-brand shadow-[0_0_14px_var(--cursor-glow)]"
-                  />
-                )}
+                {visiblePhase >= 1 &&
+                  visiblePhase < 3 && (
+                    <motion.div
+                      initial={{
+                        top: "10%",
+                        opacity: 0,
+                      }}
+                      animate={{
+                        top: "82%",
+                        opacity: [
+                          0,
+                          1,
+                          1,
+                          0,
+                        ],
+                      }}
+                      transition={{
+                        duration: 1.5,
+                        ease: "easeInOut",
+                      }}
+                      className="pointer-events-none absolute left-0 right-0 z-20 h-px bg-brand shadow-[0_0_14px_var(--cursor-glow)]"
+                    />
+                  )}
 
                 <div className="mx-auto max-w-2xl">
                   <div className="flex items-center justify-between gap-4">
@@ -373,7 +435,11 @@ export function PolicyScopeShowcase() {
                       animate={
                         visiblePhase === 1
                           ? {
-                              scale: [1, 0.96, 1],
+                              scale: [
+                                1,
+                                0.96,
+                                1,
+                              ],
                             }
                           : undefined
                       }
@@ -383,14 +449,16 @@ export function PolicyScopeShowcase() {
                       className={`rounded-lg border px-3 py-2 text-xs font-medium ${
                         visiblePhase >= 3
                           ? "border-emerald-500/25 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
-                          : visiblePhase >= 1
+                          : visiblePhase >=
+                              1
                             ? "border-brand/30 bg-brand/10 text-brand"
                             : "bg-background text-muted-foreground"
                       }`}
                     >
                       {visiblePhase >= 3
                         ? "Scan complete"
-                        : visiblePhase >= 1
+                        : visiblePhase >=
+                            1
                           ? "Scanning..."
                           : "Scan page"}
                     </motion.div>
@@ -398,59 +466,80 @@ export function PolicyScopeShowcase() {
 
                   <div className="mt-8 space-y-6 text-sm leading-7 text-muted-foreground">
                     <p>
-                      We collect information that you provide when
-                      creating an account and using the service.
+                      We collect
+                      information that you
+                      provide when creating
+                      an account and using
+                      the service.
                     </p>
 
                     <p>
                       We may{" "}
                       <span
                         className={`rounded px-1 py-0.5 transition-colors duration-500 ${
-                          visiblePhase >= 2
+                          visiblePhase >=
+                          2
                             ? "bg-[#7fc4b7]/25 text-foreground"
                             : ""
                         }`}
                       >
-                        share personal information with service
-                        providers and affiliated partners
+                        share personal
+                        information with
+                        service providers
+                        and affiliated
+                        partners
                       </span>{" "}
-                      when needed to operate the platform.
+                      when needed to
+                      operate the
+                      platform.
                     </p>
 
                     <p>
                       Your subscription{" "}
                       <span
                         className={`rounded px-1 py-0.5 transition-colors duration-500 ${
-                          visiblePhase >= 2
+                          visiblePhase >=
+                          2
                             ? "bg-[#d8b45a]/25 text-foreground"
                             : ""
                         }`}
                       >
-                        renews automatically unless cancelled before
-                        the next billing date
+                        renews
+                        automatically
+                        unless cancelled
+                        before the next
+                        billing date
                       </span>
                       .
                     </p>
 
                     <p>
-                      Any legal dispute will be handled through{" "}
+                      Any legal dispute
+                      will be handled
+                      through{" "}
                       <span
                         className={`rounded px-1 py-0.5 transition-colors duration-500 ${
-                          visiblePhase >= 2
+                          visiblePhase >=
+                          2
                             ? "bg-[#df7575]/25 text-foreground"
                             : ""
                         }`}
                       >
-                        binding arbitration and limits on class
+                        binding
+                        arbitration and
+                        limits on class
                         actions
                       </span>
                       .
                     </p>
 
                     <p>
-                      We may update these terms from time to time.
-                      Continued use of the service means you accept
-                      the updated policy.
+                      We may update these
+                      terms from time to
+                      time. Continued use
+                      of the service means
+                      you accept the
+                      updated policy.
                     </p>
                   </div>
 
@@ -473,13 +562,18 @@ export function PolicyScopeShowcase() {
                         <Sparkles className="h-4 w-4 text-brand" />
 
                         <p className="text-sm font-semibold">
-                          Plain-English explanation
+                          Plain-English
+                          explanation
                         </p>
                       </div>
 
                       <p className="mt-3 text-sm leading-6 text-muted-foreground">
-                        You may have to resolve a dispute through
-                        arbitration instead of joining a class-action
+                        You may have to
+                        resolve a dispute
+                        through
+                        arbitration
+                        instead of joining
+                        a class-action
                         lawsuit.
                       </p>
                     </motion.div>
@@ -509,7 +603,12 @@ export function PolicyScopeShowcase() {
                 }
                 transition={{
                   duration: 0.4,
-                  ease: [0.22, 1, 0.36, 1],
+                  ease: [
+                    0.22,
+                    1,
+                    0.36,
+                    1,
+                  ],
                 }}
                 className="border-t bg-card/80 p-5 lg:border-l lg:border-t-0"
               >
@@ -525,7 +624,9 @@ export function PolicyScopeShowcase() {
                   </div>
 
                   <motion.div
-                    key={detectionCount}
+                    key={
+                      detectionCount
+                    }
                     initial={{
                       scale: 0.8,
                       opacity: 0,
@@ -541,56 +642,71 @@ export function PolicyScopeShowcase() {
                 </div>
 
                 <div className="mt-6 space-y-3">
-                  {categories.map((category, index) => (
-                    <motion.div
-                      key={category.name}
-                      initial={
-                        shouldReduceMotion
-                          ? false
-                          : {
-                              opacity: 0,
-                              x: 12,
-                            }
-                      }
-                      animate={
-                        visiblePhase >= 3
-                          ? {
-                              opacity: 1,
-                              x: 0,
-                            }
-                          : {
-                              opacity: 0,
-                              x: 12,
-                            }
-                      }
-                      transition={{
-                        duration: 0.3,
-                        delay: shouldReduceMotion
-                          ? 0
-                          : index * 0.07,
-                      }}
-                      className="rounded-xl border bg-background/60 p-3"
-                    >
-                      <div className="flex items-center justify-between gap-3">
-                        <div className="flex items-center gap-2">
-                          <span
-                            className="h-2.5 w-2.5 rounded-full"
-                            style={{
-                              backgroundColor: category.color,
-                            }}
-                          />
+                  {categories.map(
+                    (
+                      category,
+                      index,
+                    ) => (
+                      <motion.div
+                        key={
+                          category.name
+                        }
+                        initial={
+                          shouldReduceMotion
+                            ? false
+                            : {
+                                opacity: 0,
+                                x: 12,
+                              }
+                        }
+                        animate={
+                          visiblePhase >=
+                          3
+                            ? {
+                                opacity: 1,
+                                x: 0,
+                              }
+                            : {
+                                opacity: 0,
+                                x: 12,
+                              }
+                        }
+                        transition={{
+                          duration: 0.3,
+                          delay:
+                            shouldReduceMotion
+                              ? 0
+                              : index *
+                                0.07,
+                        }}
+                        className="rounded-xl border bg-background/60 p-3"
+                      >
+                        <div className="flex items-center justify-between gap-3">
+                          <div className="flex items-center gap-2">
+                            <span
+                              className="h-2.5 w-2.5 rounded-full"
+                              style={{
+                                backgroundColor:
+                                  category.color,
+                              }}
+                            />
 
-                          <span className="text-xs font-medium">
-                            {category.name}
+                            <span className="text-xs font-medium">
+                              {
+                                category.name
+                              }
+                            </span>
+                          </div>
+
+                          <span className="text-xs text-muted-foreground">
+                            {
+                              category.count
+                            }
                           </span>
                         </div>
-
-                        <span className="text-xs text-muted-foreground">
-                          {category.count}
-                        </span>
-                      </div>
-                    </motion.div>
-                  ))}
+                      </motion.div>
+                    ),
+                  )}
                 </div>
 
                 <div className="mt-5 rounded-xl border bg-background/60 p-3">
