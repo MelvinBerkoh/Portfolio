@@ -9,5 +9,5 @@ export const siteConfig = {
   school: "New Jersey Institute of Technology",
   degree: "B.S. in Computer Science",
   summary:
-    "Computer Science student at NJIT focused on building practical software with React, TypeScript, JavaScript, Node.js, and modern web technologies.",
+    "NJIT Computer Science graduate building full-stack products, frontend systems, and data tools with modern web technologies.",
 };
