@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  ChevronDown,
   Code2,
   Database,
   Monitor,
@@ -315,14 +316,221 @@ type SkillCardProps = {
   index: number;
 };
 
-function SkillCard({
+function MobileSkillCard({
   module,
   index,
 }: SkillCardProps) {
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion =
+    useReducedMotion();
 
-  const [activeSkillIndex, setActiveSkillIndex] =
-    useState(0);
+  const [openSkillIndex, setOpenSkillIndex] =
+    useState<number | null>(null);
+
+  const Icon = module.icon;
+
+  return (
+    <motion.div
+      initial={
+        shouldReduceMotion
+          ? false
+          : {
+              opacity: 0,
+              y: 24,
+            }
+      }
+      whileInView={{
+        opacity: 1,
+        y: 0,
+      }}
+      viewport={{
+        once: true,
+        margin: "-60px",
+      }}
+      transition={{
+        duration: shouldReduceMotion
+          ? 0
+          : 0.45,
+        delay: shouldReduceMotion
+          ? 0
+          : index * 0.06,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      className="relative overflow-hidden rounded-[24px] border bg-card lg:hidden"
+    >
+      <div
+        aria-hidden="true"
+        className="portfolio-grid pointer-events-none absolute inset-0 opacity-[0.14]"
+      />
+
+      <div className="relative z-10 p-5 sm:p-7">
+        <div className="flex items-start justify-between gap-5">
+          <div>
+            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-brand">
+              {module.number} /{" "}
+              {module.label}
+            </p>
+
+            <h3 className="mt-3 text-3xl font-semibold tracking-[-0.035em]">
+              {module.title}
+            </h3>
+          </div>
+
+          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-brand/10 text-brand">
+            <Icon className="h-5 w-5" />
+          </div>
+        </div>
+
+        <p className="mt-5 text-sm leading-7 text-muted-foreground sm:text-base">
+          {module.description}
+        </p>
+
+        <div className="mt-8">
+          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+            Explore the stack
+          </p>
+
+          <div className="mt-4 space-y-2">
+            {module.skills.map(
+              (skill, skillIndex) => {
+                const isOpen =
+                  openSkillIndex ===
+                  skillIndex;
+
+                const contentId = `mobile-${module.number}-${skillIndex}`;
+
+                return (
+                  <div
+                    key={skill.name}
+                    className={`overflow-hidden rounded-2xl border transition-colors duration-300 ${
+                      isOpen
+                        ? "border-brand/45 bg-brand/[0.07]"
+                        : "bg-background/45"
+                    }`}
+                  >
+                    <button
+                      type="button"
+                      aria-expanded={
+                        isOpen
+                      }
+                      aria-controls={
+                        contentId
+                      }
+                      onClick={() => {
+                        setOpenSkillIndex(
+                          (current) =>
+                            current ===
+                            skillIndex
+                              ? null
+                              : skillIndex,
+                        );
+                      }}
+                      className="flex min-h-14 w-full touch-manipulation items-center justify-between gap-4 px-4 py-3.5 text-left font-mono text-xs"
+                    >
+                      <span className="flex min-w-0 items-center gap-3">
+                        <span
+                          className={`h-1.5 w-1.5 shrink-0 rounded-full transition-colors duration-300 ${
+                            isOpen
+                              ? "bg-brand shadow-[0_0_8px_var(--cursor-glow)]"
+                              : "bg-muted-foreground/60"
+                          }`}
+                        />
+
+                        <span
+                          className={`truncate transition-colors duration-300 ${
+                            isOpen
+                              ? "text-foreground"
+                              : "text-muted-foreground"
+                          }`}
+                        >
+                          {skill.name}
+                        </span>
+                      </span>
+
+                      <ChevronDown
+                        className={`h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                          isOpen
+                            ? "rotate-180"
+                            : "rotate-0"
+                        }`}
+                      />
+                    </button>
+
+                    <div
+                      id={contentId}
+                      aria-hidden={
+                        !isOpen
+                      }
+                      className="grid"
+                      style={{
+                        gridTemplateRows:
+                          isOpen
+                            ? "1fr"
+                            : "0fr",
+                        opacity:
+                          isOpen ? 1 : 0,
+                        transition: shouldReduceMotion
+                          ? "none"
+                          : [
+                              "grid-template-rows 520ms cubic-bezier(0.22, 1, 0.36, 1)",
+                              "opacity 260ms ease",
+                            ].join(", "),
+                      }}
+                    >
+                      <div className="min-h-0 overflow-hidden">
+                        <div className="border-t border-border/80 px-4 pb-4 pt-4">
+                          <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.17em] text-muted-foreground">
+                            Proven in
+                          </p>
+
+                          <div className="mt-3 flex flex-wrap gap-2">
+                            {skill.projects.map(
+                              (project) => (
+                                <span
+                                  key={
+                                    project
+                                  }
+                                  className="rounded-full border bg-card px-3 py-1.5 text-xs text-muted-foreground"
+                                >
+                                  {
+                                    project
+                                  }
+                                </span>
+                              ),
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              },
+            )}
+          </div>
+        </div>
+
+        <div className="mt-7 flex items-center gap-3 font-mono text-[9px] uppercase tracking-[0.15em] text-muted-foreground">
+          <span className="h-px flex-1 bg-border" />
+
+          tap a skill to inspect
+
+          <span className="h-px flex-1 bg-border" />
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+function DesktopSkillCard({
+  module,
+  index,
+}: SkillCardProps) {
+  const shouldReduceMotion =
+    useReducedMotion();
+
+  const [
+    activeSkillIndex,
+    setActiveSkillIndex,
+  ] = useState(0);
 
   const [pointer, setPointer] = useState({
     x: 0,
@@ -386,7 +594,7 @@ function SkillCard({
 
   return (
     <div
-      className="relative"
+      className="relative hidden lg:block"
       style={{
         perspective: "1200px",
       }}
@@ -417,9 +625,9 @@ function SkillCard({
         }}
       >
         <motion.div
-          onPointerEnter={() =>
-            setIsHovered(true)
-          }
+          onPointerEnter={() => {
+            setIsHovered(true);
+          }}
           onPointerMove={
             handlePointerMove
           }
@@ -492,7 +700,7 @@ function SkillCard({
             />
           )}
 
-          <div className="relative min-h-[560px] overflow-hidden rounded-[24px] bg-card p-6 sm:p-8">
+          <div className="relative min-h-[560px] overflow-hidden rounded-[24px] bg-card p-8">
             <motion.div
               aria-hidden="true"
               animate={{
@@ -531,7 +739,7 @@ function SkillCard({
                     {module.label}
                   </p>
 
-                  <h3 className="mt-3 text-3xl font-semibold tracking-[-0.035em] sm:text-4xl">
+                  <h3 className="mt-3 text-4xl font-semibold tracking-[-0.035em]">
                     {module.title}
                   </h3>
                 </div>
@@ -556,7 +764,7 @@ function SkillCard({
                 </motion.div>
               </div>
 
-              <p className="mt-5 max-w-xl text-sm leading-7 text-muted-foreground sm:text-base">
+              <p className="mt-5 max-w-xl text-base leading-7 text-muted-foreground">
                 {module.description}
               </p>
 
@@ -567,35 +775,36 @@ function SkillCard({
 
                 <div className="mt-4 grid grid-cols-2 gap-2">
                   {module.skills.map(
-                    (skill, skillIndex) => {
+                    (
+                      skill,
+                      skillIndex,
+                    ) => {
                       const isActive =
                         skillIndex ===
                         activeSkillIndex;
 
                       return (
                         <button
-                          key={
-                            skill.name
-                          }
+                          key={skill.name}
                           type="button"
                           aria-pressed={
                             isActive
                           }
-                          onMouseEnter={() =>
+                          onMouseEnter={() => {
                             setActiveSkillIndex(
                               skillIndex,
-                            )
-                          }
-                          onFocus={() =>
+                            );
+                          }}
+                          onFocus={() => {
                             setActiveSkillIndex(
                               skillIndex,
-                            )
-                          }
-                          onClick={() =>
+                            );
+                          }}
+                          onClick={() => {
                             setActiveSkillIndex(
                               skillIndex,
-                            )
-                          }
+                            );
+                          }}
                           className={`group/skill relative overflow-hidden rounded-xl border px-3 py-3 text-left font-mono text-xs transition duration-200 ${
                             isActive
                               ? "border-brand/40 bg-brand/10 text-foreground"
@@ -660,9 +869,7 @@ function SkillCard({
                   </motion.div>
                 </div>
 
-                <AnimatePresence
-                  mode="wait"
-                >
+                <AnimatePresence mode="wait">
                   <motion.div
                     key={
                       activeSkill.name
@@ -712,7 +919,8 @@ function SkillCard({
                             shouldReduceMotion
                               ? false
                               : {
-                                  opacity: 0,
+                                  opacity:
+                                    0,
                                   x: -6,
                                 }
                           }
@@ -760,6 +968,25 @@ function SkillCard({
   );
 }
 
+function SkillCard({
+  module,
+  index,
+}: SkillCardProps) {
+  return (
+    <>
+      <MobileSkillCard
+        module={module}
+        index={index}
+      />
+
+      <DesktopSkillCard
+        module={module}
+        index={index}
+      />
+    </>
+  );
+}
+
 export function SkillsSection() {
   return (
     <section
@@ -794,9 +1021,8 @@ export function SkillsSection() {
           </h2>
 
           <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
-            Hover through the stack to see
-            where each skill shows up in
-            real work.
+            Explore the stack to see where each skill shows up
+            in real work.
           </p>
         </motion.div>
 
