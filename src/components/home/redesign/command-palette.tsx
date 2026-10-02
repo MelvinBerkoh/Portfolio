@@ -52,6 +52,12 @@ const commands: CommandItem[] = [
     icon: Route,
   },
   {
+    label: "Go to Skills",
+    description: "See the tools I use",
+    href: "#skills",
+    icon: Code2,
+  },
+  {
     label: "Go to About",
     description: "A little more about me",
     href: "#about",
@@ -100,6 +106,7 @@ export function CommandPalette({
   onOpenChange: (open: boolean) => void;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
 
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -181,6 +188,52 @@ export function CommandPalette({
         return;
       }
 
+      if (event.key === "Tab") {
+        const dialog = dialogRef.current;
+
+        if (!dialog) {
+          return;
+        }
+
+        const focusableElements =
+          dialog.querySelectorAll<HTMLElement>(
+            [
+              "input:not([disabled])",
+              "button:not([disabled])",
+              "a[href]",
+              '[tabindex]:not([tabindex="-1"])',
+            ].join(","),
+          );
+
+        if (focusableElements.length === 0) {
+          return;
+        }
+
+        const firstElement = focusableElements[0];
+
+        const lastElement =
+          focusableElements[focusableElements.length - 1];
+
+        if (
+          event.shiftKey &&
+          document.activeElement === firstElement
+        ) {
+          event.preventDefault();
+          lastElement.focus();
+          return;
+        }
+
+        if (
+          !event.shiftKey &&
+          document.activeElement === lastElement
+        ) {
+          event.preventDefault();
+          firstElement.focus();
+        }
+
+        return;
+      }
+
       if (event.key === "ArrowDown") {
         event.preventDefault();
 
@@ -240,18 +293,30 @@ export function CommandPalette({
     <AnimatePresence>
       {open && (
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.16 }}
+          initial={{
+            opacity: 0,
+          }}
+          animate={{
+            opacity: 1,
+          }}
+          exit={{
+            opacity: 0,
+          }}
+          transition={{
+            duration: 0.16,
+          }}
           className="fixed inset-0 z-[200] flex items-start justify-center bg-background/70 px-4 pt-[14vh] backdrop-blur-md"
-          onMouseDown={(event) => {
+          onPointerDown={(event) => {
             if (event.target === event.currentTarget) {
               closePalette();
             }
           }}
         >
           <motion.div
+            ref={dialogRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Site navigation"
             initial={{
               opacity: 0,
               y: -14,
@@ -284,6 +349,7 @@ export function CommandPalette({
                   setSelectedIndex(0);
                 }}
                 placeholder="Search the site..."
+                aria-label="Search site commands"
                 className="h-14 flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
               />
 
@@ -308,6 +374,9 @@ export function CommandPalette({
                       key={command.label}
                       type="button"
                       onMouseEnter={() => {
+                        setSelectedIndex(index);
+                      }}
+                      onFocus={() => {
                         setSelectedIndex(index);
                       }}
                       onClick={() => {
@@ -347,7 +416,10 @@ export function CommandPalette({
                 })
               ) : (
                 <div className="px-3 py-10 text-center">
-                  <p className="text-sm font-medium">No results</p>
+                  <p className="text-sm font-medium">
+                    No results
+                  </p>
+
                   <p className="mt-1 text-xs text-muted-foreground">
                     Try another search.
                   </p>
