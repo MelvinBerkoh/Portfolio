@@ -1,6 +1,7 @@
 export const siteConfig = {
   name: "Melvin Berkoh",
   title: "Software Engineer",
+  url: "https://portfolio-ten-olive-82.vercel.app",
   email: "melvinberkoh@gmail.com",
   github: "https://github.com/MelvinBerkoh",
   linkedin: "https://www.linkedin.com/in/melvinberkoh/",
