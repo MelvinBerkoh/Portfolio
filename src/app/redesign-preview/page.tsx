@@ -1,3 +1,4 @@
+import { AdditionalWorkSection } from "@/components/home/redesign/additional-work-section";
 import { ApplicationTrackerShowcase } from "@/components/home/redesign/application-tracker-showcase";
 import { CommercePulseShowcase } from "@/components/home/redesign/commerce-pulse-showcase";
 import { CustomCursor } from "@/components/home/redesign/custom-cursor";
@@ -7,6 +8,7 @@ import { JourneySection } from "@/components/home/redesign/journey-section";
 import { OpsDeskShowcase } from "@/components/home/redesign/opsdesk-showcase";
 import { PolicyScopeShowcase } from "@/components/home/redesign/policyscope-showcase";
 import { SiteHeader } from "@/components/home/redesign/site-header";
+import { SkillsSection } from "@/components/home/redesign/skills-section";
 
 export default function RedesignPreviewPage() {
   return (
@@ -22,6 +24,8 @@ export default function RedesignPreviewPage() {
         <PolicyScopeShowcase />
         <CommercePulseShowcase />
         <JourneySection />
+        <SkillsSection />
+        <AdditionalWorkSection />
       </div>
     </main>
   );
