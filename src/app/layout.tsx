@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 const siteTitle = "Melvin Berkoh | Software Engineer Portfolio";
 
 const siteDescription =
-  "Portfolio of Melvin Berkoh, a Computer Science student at NJIT focused on frontend, full-stack, Chrome extension, AI-assisted, multiplayer, and data-driven software projects.";
+  "Portfolio of Melvin Berkoh, an NJIT Computer Science graduate building full-stack, frontend, data, and AI-assisted software with React, TypeScript, Next.js, Node.js, Python, SQL, and PostgreSQL.";
 
 export const metadata: Metadata = {
   title: {
@@ -35,7 +35,12 @@ export const metadata: Metadata = {
     "React",
     "TypeScript",
     "Next.js",
-    "Chrome Extension",
+    "Node.js",
+    "Python",
+    "SQL",
+    "PostgreSQL",
+    "Prisma",
+    "Data Analytics",
     "AI Tooling",
     "NJIT",
     "Computer Science",

@@ -5,18 +5,18 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import {
   ArrowUpRight,
-  Code2,
   BriefcaseBusiness,
+  Code2,
+  GraduationCap,
   Mail,
   MapPin,
-  GraduationCap,
 } from "lucide-react";
 
+import { portfolioProjects } from "@/data/portfolio-projects";
 import { siteConfig } from "@/data/site";
-import { projects } from "@/data/projects";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -32,9 +32,12 @@ const skills = [
   "Tailwind CSS",
   "Node.js",
   "Express",
+  "PostgreSQL",
+  "Prisma",
   "Python",
   "SQL",
-  "Chrome Extensions",
+  "dbt",
+  "Tableau",
   "REST APIs",
   "GitHub",
 ];
@@ -53,7 +56,7 @@ const workHabits = [
   {
     title: "Debugging Mindset",
     description:
-      "Comfortable tracing issues across UI state, API calls, browser behavior, local setup, and project configuration.",
+      "Comfortable tracing issues across UI state, API calls, databases, browser behavior, local setup, and project configuration.",
   },
   {
     title: "Ownership",
@@ -77,7 +80,7 @@ const stats = [
   },
 ];
 
-const moreProjects = [
+const standaloneProjects = [
   {
     title: "Cherries On Top Catering Website",
     category: "Business Website / Early Web Project",
@@ -98,7 +101,13 @@ const moreProjects = [
 ];
 
 export function HomePage() {
-  const featuredProjects = projects.filter((project) => project.featured);
+  const featuredProjects = portfolioProjects.filter(
+    (project) => project.featured,
+  );
+
+  const additionalCaseStudies = portfolioProjects.filter(
+    (project) => !project.featured,
+  );
 
   return (
     <main className="min-h-screen overflow-hidden bg-background text-foreground">
@@ -121,30 +130,35 @@ export function HomePage() {
             >
               Projects
             </Link>
+
             <Link
               href="#more-projects"
               className="hidden text-sm text-muted-foreground transition hover:text-foreground sm:inline"
             >
               More Work
             </Link>
+
             <Link
               href="#skills"
               className="hidden text-sm text-muted-foreground transition hover:text-foreground sm:inline"
             >
               Skills
             </Link>
+
             <Link
               href="#work"
               className="hidden text-sm text-muted-foreground transition hover:text-foreground sm:inline"
             >
               How I Work
             </Link>
+
             <Link
               href="#contact"
               className="hidden text-sm text-muted-foreground transition hover:text-foreground sm:inline"
             >
               Contact
             </Link>
+
             <ThemeToggle />
           </div>
         </div>
@@ -161,6 +175,7 @@ export function HomePage() {
             <Badge variant="secondary" className="w-fit">
               Software Engineer • NJIT CS Graduate
             </Badge>
+
             <Badge variant="outline" className="w-fit">
               Open to Frontend / Full-Stack Roles
             </Badge>
@@ -175,12 +190,11 @@ export function HomePage() {
             </h1>
 
             <p className="max-w-2xl text-lg leading-8 text-muted-foreground">
-                I&apos;m Melvin Berkoh, a recent Computer Science graduate from NJIT.
-                I build full-stack and frontend software with React, TypeScript,
-                JavaScript, Node.js, and Python, with experience turning messy
-                requirements into clean interfaces, useful tools, and project work
-                that can actually be demoed. 
-           </p>
+              I&apos;m Melvin Berkoh, a Computer Science graduate from NJIT. I
+              build full-stack and frontend software with React, TypeScript,
+              Next.js, Node.js, PostgreSQL, and Python, with experience taking
+              projects from an idea to a working product.
+            </p>
           </div>
 
           <div className="flex flex-col gap-3 sm:flex-row">
@@ -237,9 +251,11 @@ export function HomePage() {
             <CardHeader>
               <CardTitle>Recruiter Snapshot</CardTitle>
             </CardHeader>
+
             <CardContent className="space-y-5 text-sm text-muted-foreground">
               <div className="flex gap-3">
                 <GraduationCap className="mt-0.5 h-5 w-5 text-foreground" />
+
                 <div>
                   <p className="font-medium text-foreground">
                     B.S. Computer Science
@@ -250,6 +266,7 @@ export function HomePage() {
 
               <div className="flex gap-3">
                 <MapPin className="mt-0.5 h-5 w-5 text-foreground" />
+
                 <div>
                   <p className="font-medium text-foreground">
                     Based in New Jersey
@@ -259,13 +276,13 @@ export function HomePage() {
               </div>
 
               <div className="rounded-xl border bg-muted/60 p-4">
-  <p className="font-medium text-foreground">What I bring:</p>
-  <p>
-    Hands-on experience building real software across frontend,
-    backend, AI-assisted tools, data projects, and client-facing web
-    work.
-  </p>
-</div>
+                <p className="font-medium text-foreground">What I bring:</p>
+                <p>
+                  Hands-on experience building full-stack products, frontend
+                  systems, data pipelines, AI-assisted tools, and client-facing
+                  websites.
+                </p>
+              </div>
             </CardContent>
           </Card>
 
@@ -287,17 +304,21 @@ export function HomePage() {
       <section id="projects" className="mx-auto max-w-6xl px-6 py-16">
         <div className="mb-8 max-w-3xl space-y-3">
           <Badge variant="outline">Featured Work</Badge>
+
           <h2 className="text-3xl font-bold tracking-tight">Case studies</h2>
+
           <p className="text-muted-foreground">
-            A focused look at the projects that best show my software
-            engineering experience across AI tooling, frontend development,
-            browser extensions, multiplayer systems, and data science.
+            Projects that show my experience across full-stack product
+            development, authentication and authorization, browser tooling,
+            databases, testing, and data analytics.
           </p>
         </div>
 
         <div className="space-y-5">
           {featuredProjects.map((project, index) => {
-              const previewImage = project.thumbnail ?? project.screenshots?.[0]?.src;
+            const previewImage =
+              project.thumbnail ?? project.screenshots?.[0]?.src;
+
             return (
               <motion.div
                 key={project.slug}
@@ -315,12 +336,14 @@ export function HomePage() {
                             src={previewImage}
                             alt={`${project.title} preview`}
                             fill
-                            className="object-cover object-center transition duration-500 group-hover:scale-105"                          />
+                            className="object-cover object-center transition duration-500 group-hover:scale-105"
+                          />
                         ) : (
                           <div className="flex h-full min-h-44 flex-col justify-between bg-gradient-to-br from-muted via-muted/60 to-background p-5">
                             <Badge variant="secondary" className="w-fit">
                               Case Study
                             </Badge>
+
                             <div>
                               <p className="text-lg font-semibold">
                                 {project.title}
@@ -390,26 +413,31 @@ export function HomePage() {
         </div>
       </section>
 
-      <section id="more-projects" className="mx-auto max-w-6xl px-6 py-16">
+      <section
+        id="more-projects"
+        className="mx-auto max-w-6xl px-6 py-16"
+      >
         <div className="mb-8 max-w-2xl space-y-3">
           <Badge variant="outline">More Work</Badge>
+
           <h2 className="text-3xl font-bold tracking-tight">
             Additional projects
           </h2>
+
           <p className="text-muted-foreground">
-            Smaller projects and earlier work that show where I started, what
-            I&apos;ve shipped, and how my skills have grown over time.
+            Earlier projects and client work that show how my skills have grown
+            across frontend development, team projects, and data science.
           </p>
         </div>
 
         <div className="grid gap-5">
-          {moreProjects.map((project, index) => (
+          {additionalCaseStudies.map((project, index) => (
             <motion.div
-              key={project.title}
+              key={project.slug}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.35, delay: index * 0.08 }}
+              transition={{ duration: 0.35, delay: index * 0.06 }}
             >
               <Card className="overflow-hidden bg-card/80 backdrop-blur transition hover:-translate-y-1 hover:shadow-md">
                 <CardContent className="grid gap-6 p-6 md:grid-cols-[1.2fr_0.8fr] md:items-center">
@@ -422,13 +450,14 @@ export function HomePage() {
                       <h3 className="text-2xl font-semibold tracking-tight">
                         {project.title}
                       </h3>
+
                       <p className="max-w-3xl leading-7 text-muted-foreground">
-                        {project.description}
+                        {project.summary}
                       </p>
                     </div>
 
                     <div className="flex flex-wrap gap-2">
-                      {project.tech.map((item) => (
+                      {project.tech.slice(0, 5).map((item) => (
                         <Badge key={item} variant="outline">
                           {item}
                         </Badge>
@@ -436,19 +465,61 @@ export function HomePage() {
                     </div>
                   </div>
 
-                  <div className="flex flex-col gap-3 sm:flex-row md:justify-end">
-                    {project.links.map((link) => (
-                      <Button key={link.href} asChild variant="outline">
-                        <Link href={link.href} target="_blank">
-                          {link.label}
-                          <ArrowUpRight className="ml-2 h-4 w-4" />
-                        </Link>
-                      </Button>
-                    ))}
+                  <div className="flex md:justify-end">
+                    <Button asChild variant="outline">
+                      <Link href={`/projects/${project.slug}`}>
+                        View Case Study
+                        <ArrowUpRight className="ml-2 h-4 w-4" />
+                      </Link>
+                    </Button>
                   </div>
                 </CardContent>
               </Card>
             </motion.div>
+          ))}
+
+          {standaloneProjects.map((project) => (
+            <Card
+              key={project.title}
+              className="overflow-hidden bg-card/80 backdrop-blur transition hover:-translate-y-1 hover:shadow-md"
+            >
+              <CardContent className="grid gap-6 p-6 md:grid-cols-[1.2fr_0.8fr] md:items-center">
+                <div className="space-y-4">
+                  <Badge variant="secondary" className="w-fit">
+                    {project.category}
+                  </Badge>
+
+                  <div className="space-y-2">
+                    <h3 className="text-2xl font-semibold tracking-tight">
+                      {project.title}
+                    </h3>
+
+                    <p className="max-w-3xl leading-7 text-muted-foreground">
+                      {project.description}
+                    </p>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2">
+                    {project.tech.map((item) => (
+                      <Badge key={item} variant="outline">
+                        {item}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-3 sm:flex-row md:justify-end">
+                  {project.links.map((link) => (
+                    <Button key={link.href} asChild variant="outline">
+                      <Link href={link.href} target="_blank">
+                        {link.label}
+                        <ArrowUpRight className="ml-2 h-4 w-4" />
+                      </Link>
+                    </Button>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </section>
@@ -456,12 +527,14 @@ export function HomePage() {
       <section id="skills" className="mx-auto max-w-6xl px-6 py-16">
         <div className="mb-8 max-w-2xl space-y-3">
           <Badge variant="outline">Technical Skills</Badge>
+
           <h2 className="text-3xl font-bold tracking-tight">
             Tools I build with
           </h2>
+
           <p className="text-muted-foreground">
-            My strongest experience is in modern web development, practical
-            frontend systems, browser tooling, and full-stack project work.
+            My strongest experience is in modern web development, full-stack
+            applications, relational databases, and practical data workflows.
           </p>
         </div>
 
@@ -488,14 +561,16 @@ export function HomePage() {
       <section id="work" className="mx-auto max-w-6xl px-6 py-16">
         <div className="mb-8 max-w-3xl space-y-3">
           <Badge variant="outline">How I Work</Badge>
+
           <h2 className="text-3xl font-bold tracking-tight">
             I focus on building clearly, communicating well, and improving
             through feedback.
           </h2>
+
           <p className="text-muted-foreground">
-            My strongest projects involved working in teams, debugging real
-            integration issues, and explaining technical decisions clearly enough
-            for both developers and non-technical audiences.
+            My strongest projects involved working through real product
+            decisions, debugging integration issues, testing important
+            workflows, and explaining technical choices clearly.
           </p>
         </div>
 
@@ -511,6 +586,7 @@ export function HomePage() {
               <Card className="h-full transition hover:-translate-y-1 hover:shadow-md">
                 <CardContent className="space-y-3 p-6">
                   <h3 className="font-semibold">{habit.title}</h3>
+
                   <p className="text-sm leading-6 text-muted-foreground">
                     {habit.description}
                   </p>
@@ -526,6 +602,7 @@ export function HomePage() {
           <CardContent className="grid gap-8 p-6 md:grid-cols-2 md:p-8">
             <div className="space-y-3">
               <Badge variant="outline">About</Badge>
+
               <h2 className="text-3xl font-bold tracking-tight">
                 I like building things that people can actually use.
               </h2>
@@ -533,14 +610,16 @@ export function HomePage() {
 
             <div className="space-y-4 text-muted-foreground">
               <p>
-                I&apos;m a Computer Science student at NJIT with experience
-                building websites, Chrome extensions, AI-assisted tools,
-                full-stack applications, and data analysis projects.
+                I&apos;m a Computer Science graduate from NJIT with experience
+                building full-stack applications, websites, Chrome extensions,
+                AI-assisted tools, and data analytics projects.
               </p>
+
               <p>
                 My background includes freelance web development, township web
                 and forms work, and team-based software projects where I worked
-                across UI, logic, debugging, documentation, and deployment.
+                across UI, backend logic, databases, debugging, documentation,
+                testing, and deployment.
               </p>
             </div>
           </CardContent>
@@ -552,6 +631,7 @@ export function HomePage() {
           <h2 className="text-3xl font-bold tracking-tight">
             Let&apos;s build something.
           </h2>
+
           <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">
             I&apos;m currently looking for software engineering, frontend,
             full-stack, and web development opportunities.
