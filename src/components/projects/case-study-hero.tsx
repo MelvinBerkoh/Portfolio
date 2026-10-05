@@ -75,7 +75,7 @@ function AnimatedEngineeringVisual() {
               repeat: Infinity,
               ease: "linear",
             }}
-            className="absolute left-10 right-10 top-10 bottom-10 rounded-full border border-brand/20"
+            className="absolute bottom-10 left-10 right-10 top-10 rounded-full border border-brand/20"
           />
 
           <div className="absolute inset-0 flex items-center justify-center">
@@ -129,31 +129,40 @@ function AnimatedEngineeringVisual() {
               bottom: "4%",
               right: "2%",
             },
-          ].map((node, index) => (
-            <motion.div
-              key={node.label}
-              animate={{
-                y: [
-                  0,
-                  index % 2 === 0
-                    ? -5
-                    : 5,
-                  0,
-                ],
-              }}
-              transition={{
-                duration:
-                  2.6 +
-                  index * 0.25,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="absolute rounded-full border bg-background/90 px-3 py-1.5 font-mono text-[8px] uppercase tracking-[0.14em] text-muted-foreground shadow-sm backdrop-blur"
-              style={node}
-            >
-              {node.label}
-            </motion.div>
-          ))}
+          ].map(
+            (
+              node,
+              index,
+            ) => (
+              <motion.div
+                key={
+                  node.label
+                }
+                animate={{
+                  y: [
+                    0,
+                    index % 2 ===
+                    0
+                      ? -5
+                      : 5,
+                    0,
+                  ],
+                }}
+                transition={{
+                  duration:
+                    2.6 +
+                    index *
+                      0.25,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="absolute rounded-full border bg-background/90 px-3 py-1.5 font-mono text-[8px] uppercase tracking-[0.14em] text-muted-foreground shadow-sm backdrop-blur"
+                style={node}
+              >
+                {node.label}
+              </motion.div>
+            ),
+          )}
         </div>
       </div>
 
@@ -193,26 +202,32 @@ export function CaseStudyHero({
     project.slug ===
     "eligido-landing-page";
 
-  const [tilt, setTilt] = useState({
-    x: 0,
-    y: 0,
-  });
+  const [tilt, setTilt] =
+    useState({
+      x: 0,
+      y: 0,
+    });
 
-  const [isHovered, setIsHovered] =
-    useState(false);
+  const [
+    isHovered,
+    setIsHovered,
+  ] = useState(false);
 
   const previewImage =
     isEligido
       ? undefined
       : project.thumbnail ??
-        project.screenshots?.[0]?.src;
+        project
+          .screenshots?.[0]
+          ?.src;
 
   const handlePointerMove = (
     event: ReactPointerEvent<HTMLDivElement>,
   ) => {
     if (
       shouldReduceMotion ||
-      event.pointerType !== "mouse"
+      event.pointerType !==
+        "mouse"
     ) {
       return;
     }
@@ -221,17 +236,21 @@ export function CaseStudyHero({
       event.currentTarget.getBoundingClientRect();
 
     const x =
-      event.clientX - rect.left;
+      event.clientX -
+      rect.left;
 
     const y =
-      event.clientY - rect.top;
+      event.clientY -
+      rect.top;
 
     setTilt({
       x:
-        (y / rect.height - 0.5) *
+        (y / rect.height -
+          0.5) *
         -3,
       y:
-        (x / rect.width - 0.5) *
+        (x / rect.width -
+          0.5) *
         3,
     });
   };
@@ -336,7 +355,7 @@ export function CaseStudyHero({
           className="pointer-events-none absolute right-[-12rem] top-[18rem] h-[28rem] w-[28rem] rounded-full bg-brand/[0.045] blur-[120px]"
         />
 
-        <div className="mx-auto max-w-[1500px] px-6 pb-16 pt-16 md:px-10 md:pt-20 lg:px-12 lg:pb-24 lg:pt-24">
+        <div className="mx-auto max-w-[1500px] px-6 pb-16 pt-14 md:px-10 md:pt-20 lg:px-12 lg:pb-24 lg:pt-24">
           <motion.div
             initial={
               shouldReduceMotion
@@ -366,7 +385,7 @@ export function CaseStudyHero({
               transition={{
                 duration: 0.8,
               }}
-              className="h-px w-10 origin-left bg-brand/50"
+              className="h-px w-8 origin-left bg-brand/50 sm:w-10"
             />
 
             <span className="text-xs text-muted-foreground">
@@ -374,8 +393,8 @@ export function CaseStudyHero({
             </span>
           </motion.div>
 
-          <div className="mt-10 grid gap-12 lg:grid-cols-[1.15fr_0.55fr] lg:items-end lg:gap-20">
-            <div>
+          <div className="mt-9 grid gap-12 lg:grid-cols-[1.15fr_0.55fr] lg:items-end lg:gap-20">
+            <div className="min-w-0">
               <motion.h1
                 initial={
                   shouldReduceMotion
@@ -398,7 +417,7 @@ export function CaseStudyHero({
                     1,
                   ],
                 }}
-                className="text-[clamp(4rem,10vw,9rem)] font-semibold leading-[0.86] tracking-[-0.07em]"
+                className="max-w-full break-words text-[clamp(2.7rem,11.5vw,4rem)] font-semibold leading-[0.9] tracking-[-0.06em] sm:text-[clamp(4rem,10vw,9rem)] sm:leading-[0.86] sm:tracking-[-0.07em]"
               >
                 {project.title}
               </motion.h1>
@@ -420,9 +439,11 @@ export function CaseStudyHero({
                   delay: 0.12,
                   duration: 0.5,
                 }}
-                className="mt-8 max-w-[720px] text-lg leading-8 text-muted-foreground sm:text-xl lg:text-2xl lg:leading-9"
+                className="mt-7 max-w-[720px] text-base leading-7 text-muted-foreground sm:mt-8 sm:text-xl sm:leading-9 lg:text-2xl"
               >
-                {presentation.heroLine}
+                {
+                  presentation.heroLine
+                }
               </motion.p>
 
               <motion.div
@@ -441,23 +462,29 @@ export function CaseStudyHero({
                 transition={{
                   delay: 0.2,
                 }}
-                className="mt-8 flex flex-wrap gap-3"
+                className="mt-7 flex flex-wrap gap-3 sm:mt-8"
               >
                 {project.links.map(
                   (link) => (
                     <Link
-                      key={link.href}
-                      href={link.href}
+                      key={
+                        link.href
+                      }
+                      href={
+                        link.href
+                      }
                       target="_blank"
                       rel="noreferrer"
-                      className={`group inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition hover:-translate-y-0.5 ${
+                      className={`group inline-flex min-h-12 items-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition hover:-translate-y-0.5 ${
                         link.type ===
                         "demo"
                           ? "sword-shine bg-brand text-brand-foreground shadow-lg shadow-brand/15"
                           : "border bg-card/70 hover:border-brand/40"
                       }`}
                     >
-                      {link.label}
+                      {
+                        link.label
+                      }
 
                       <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                     </Link>
@@ -475,7 +502,7 @@ export function CaseStudyHero({
                 transition={{
                   delay: 0.6,
                 }}
-                className="mt-12 flex items-center gap-3 text-xs text-muted-foreground"
+                className="mt-10 flex items-center gap-3 text-xs text-muted-foreground sm:mt-12"
               >
                 <motion.div
                   animate={
@@ -502,6 +529,8 @@ export function CaseStudyHero({
               </motion.div>
             </div>
 
+            {/* Product proof appears later on mobile.
+                Keep the hero lighter and faster. */}
             <motion.div
               initial={
                 shouldReduceMotion
@@ -509,7 +538,8 @@ export function CaseStudyHero({
                   : {
                       opacity: 0,
                       x: 30,
-                      scale: 0.97,
+                      scale:
+                        0.97,
                     }
               }
               animate={{
@@ -525,10 +555,13 @@ export function CaseStudyHero({
                 perspective:
                   "1200px",
               }}
+              className="hidden sm:block"
             >
               <motion.div
                 onPointerEnter={() =>
-                  setIsHovered(true)
+                  setIsHovered(
+                    true,
+                  )
                 }
                 onPointerMove={
                   handlePointerMove
@@ -537,8 +570,10 @@ export function CaseStudyHero({
                   resetPreview
                 }
                 animate={{
-                  rotateX: tilt.x,
-                  rotateY: tilt.y,
+                  rotateX:
+                    tilt.x,
+                  rotateY:
+                    tilt.y,
                   y:
                     isHovered &&
                     !shouldReduceMotion
@@ -571,7 +606,9 @@ export function CaseStudyHero({
                 ) : previewImage ? (
                   <div className="relative aspect-[16/10] bg-muted">
                     <Image
-                      src={previewImage}
+                      src={
+                        previewImage
+                      }
                       alt={`${project.title} preview`}
                       fill
                       priority
@@ -590,7 +627,8 @@ export function CaseStudyHero({
                         }}
                         transition={{
                           duration: 4,
-                          repeat: Infinity,
+                          repeat:
+                            Infinity,
                           repeatDelay: 3,
                           ease: "easeInOut",
                         }}
@@ -621,7 +659,8 @@ export function CaseStudyHero({
                     }
                     transition={{
                       duration: 2,
-                      repeat: Infinity,
+                      repeat:
+                        Infinity,
                     }}
                     className="h-2 w-2 rounded-full bg-brand shadow-[0_0_10px_var(--cursor-glow)]"
                   />

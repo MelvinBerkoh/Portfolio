@@ -36,25 +36,29 @@ const deepDiveItems: {
   {
     key: "stack",
     title: "Tech stack",
-    description: "The technologies behind the build.",
+    description:
+      "The technologies behind the build.",
     icon: Code2,
   },
   {
     key: "tools",
     title: "Libraries + tools",
-    description: "How the important pieces were used.",
+    description:
+      "How the important pieces were used.",
     icon: Wrench,
   },
   {
     key: "challenges",
     title: "Hard parts",
-    description: "The problems that needed the most thought.",
+    description:
+      "The problems that needed the most thought.",
     icon: AlertTriangle,
   },
   {
     key: "future",
     title: "Limits + next",
-    description: "What is not finished and where I would take it.",
+    description:
+      "What is not finished and where I would take it.",
     icon: Rocket,
   },
 ];
@@ -63,15 +67,21 @@ export function CaseStudyDeepDive({
   project,
   sectionNumber,
 }: CaseStudyDeepDiveProps) {
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion =
+    useReducedMotion();
 
-  const [openDive, setOpenDive] =
-    useState<DeepDiveKey | null>(null);
+  const [
+    openDive,
+    setOpenDive,
+  ] =
+    useState<DeepDiveKey | null>(
+      null,
+    );
 
   return (
     <section
       id="deep-dive"
-      className="grid gap-10 border-b py-20 lg:grid-cols-[260px_minmax(0,1fr)] lg:gap-20 lg:py-24"
+      className="grid gap-9 border-b py-16 lg:grid-cols-[260px_minmax(0,1fr)] lg:gap-20 lg:py-24"
     >
       <motion.div
         initial={
@@ -91,8 +101,16 @@ export function CaseStudyDeepDive({
           margin: "-80px",
         }}
         transition={{
-          duration: shouldReduceMotion ? 0 : 0.5,
-          ease: [0.22, 1, 0.36, 1],
+          duration:
+            shouldReduceMotion
+              ? 0
+              : 0.5,
+          ease: [
+            0.22,
+            1,
+            0.36,
+            1,
+          ],
         }}
         className="lg:sticky lg:top-28 lg:self-start"
       >
@@ -116,8 +134,10 @@ export function CaseStudyDeepDive({
               once: true,
             }}
             transition={{
-              duration: shouldReduceMotion ? 0 : 0.7,
-              delay: 0.1,
+              duration:
+                shouldReduceMotion
+                  ? 0
+                  : 0.7,
             }}
             className="h-px w-10 origin-left bg-brand/50"
           />
@@ -127,8 +147,8 @@ export function CaseStudyDeepDive({
           Deep dive
         </h2>
 
-        <p className="mt-3 max-w-[225px] text-sm leading-6 text-muted-foreground">
-          Extra technical detail for anyone who wants to keep digging.
+        <p className="mt-3 max-w-[300px] text-sm leading-6 text-muted-foreground lg:max-w-[225px]">
+          Optional technical detail if you want to go deeper.
         </p>
 
         <div className="mt-6 hidden items-center gap-2 font-mono text-[8px] uppercase tracking-[0.16em] text-muted-foreground lg:flex">
@@ -137,12 +157,17 @@ export function CaseStudyDeepDive({
               shouldReduceMotion
                 ? undefined
                 : {
-                    opacity: [0.25, 1, 0.25],
+                    opacity: [
+                      0.25,
+                      1,
+                      0.25,
+                    ],
                   }
             }
             transition={{
               duration: 2,
-              repeat: Infinity,
+              repeat:
+                Infinity,
             }}
             className="h-1.5 w-1.5 rounded-full bg-brand"
           />
@@ -169,368 +194,337 @@ export function CaseStudyDeepDive({
           margin: "-80px",
         }}
         transition={{
-          duration: shouldReduceMotion ? 0 : 0.55,
+          duration:
+            shouldReduceMotion
+              ? 0
+              : 0.55,
         }}
       >
-        <div className="mb-8 max-w-2xl">
+        <div className="mb-6 hidden max-w-2xl sm:block">
           <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-brand">
             Technical appendix
           </p>
 
           <p className="mt-3 text-lg font-medium leading-8 tracking-[-0.02em]">
-            The main story is above. This section keeps the deeper engineering
-            details available without making every visitor read through them.
+            The main story is above. Open only the technical details you want to
+            inspect.
           </p>
         </div>
 
         <div className="border-t">
-          {deepDiveItems.map((item, index) => {
-            const isOpen =
-              openDive === item.key;
+          {deepDiveItems.map(
+            (
+              item,
+              index,
+            ) => {
+              const isOpen =
+                openDive ===
+                item.key;
 
-            const Icon = item.icon;
+              const Icon =
+                item.icon;
 
-            return (
-              <motion.div
-                key={item.key}
-                initial={
-                  shouldReduceMotion
-                    ? false
-                    : {
-                        opacity: 0,
-                        y: 12,
-                      }
-                }
-                whileInView={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                viewport={{
-                  once: true,
-                }}
-                transition={{
-                  duration: shouldReduceMotion ? 0 : 0.4,
-                  delay: shouldReduceMotion
-                    ? 0
-                    : index * 0.05,
-                }}
-                className="border-b"
-              >
-                <button
-                  type="button"
-                  aria-expanded={isOpen}
-                  onClick={() =>
-                    setOpenDive(
-                      isOpen
-                        ? null
-                        : item.key,
-                    )
+              return (
+                <motion.div
+                  key={
+                    item.key
                   }
-                  className="group flex w-full items-center gap-5 py-6 text-left sm:py-7"
-                >
-                  <motion.div
-                    whileHover={
+                  initial={
+                    shouldReduceMotion
+                      ? false
+                      : {
+                          opacity: 0,
+                          y: 10,
+                        }
+                  }
+                  whileInView={{
+                    opacity: 1,
+                    y: 0,
+                  }}
+                  viewport={{
+                    once: true,
+                  }}
+                  transition={{
+                    duration:
                       shouldReduceMotion
-                        ? undefined
-                        : {
-                            rotate: -6,
-                            scale: 1.06,
-                          }
+                        ? 0
+                        : 0.35,
+                    delay:
+                      shouldReduceMotion
+                        ? 0
+                        : index *
+                          0.04,
+                  }}
+                  className="border-b"
+                >
+                  <button
+                    type="button"
+                    aria-expanded={
+                      isOpen
                     }
-                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border bg-card text-muted-foreground transition-colors group-hover:border-brand/40 group-hover:bg-brand/10 group-hover:text-brand"
+                    onClick={() =>
+                      setOpenDive(
+                        isOpen
+                          ? null
+                          : item.key,
+                      )
+                    }
+                    className="group flex w-full items-center gap-4 py-5 text-left sm:gap-5 sm:py-7"
                   >
-                    <Icon className="h-4 w-4" />
-                  </motion.div>
-
-                  <div className="min-w-0 flex-1">
-                    <h3 className="text-base font-semibold transition-colors group-hover:text-brand sm:text-lg">
-                      {item.title}
-                    </h3>
-
-                    <p className="mt-1 text-sm text-muted-foreground">
-                      {item.description}
-                    </p>
-                  </div>
-
-                  <motion.div
-                    animate={{
-                      rotate: isOpen
-                        ? 180
-                        : 0,
-                      scale: isOpen
-                        ? 1.06
-                        : 1,
-                    }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 260,
-                      damping: 20,
-                    }}
-                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border text-muted-foreground transition-colors group-hover:border-brand/40 group-hover:text-brand"
-                  >
-                    <ChevronDown className="h-4 w-4" />
-                  </motion.div>
-                </button>
-
-                <AnimatePresence initial={false}>
-                  {isOpen && (
                     <motion.div
-                      initial={{
-                        height: 0,
-                        opacity: 0,
-                      }}
+                      whileHover={
+                        shouldReduceMotion
+                          ? undefined
+                          : {
+                              rotate:
+                                -6,
+                              scale:
+                                1.06,
+                            }
+                      }
+                      className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-xl border bg-card text-muted-foreground transition-colors group-hover:border-brand/40 group-hover:bg-brand/10 group-hover:text-brand sm:flex"
+                    >
+                      <Icon className="h-4 w-4" />
+                    </motion.div>
+
+                    <div className="min-w-0 flex-1">
+                      <h3 className="text-base font-semibold transition-colors group-hover:text-brand sm:text-lg">
+                        {
+                          item.title
+                        }
+                      </h3>
+
+                      <p className="mt-1 text-xs leading-5 text-muted-foreground sm:text-sm">
+                        {
+                          item.description
+                        }
+                      </p>
+                    </div>
+
+                    <motion.div
                       animate={{
-                        height: "auto",
-                        opacity: 1,
-                      }}
-                      exit={{
-                        height: 0,
-                        opacity: 0,
+                        rotate:
+                          isOpen
+                            ? 180
+                            : 0,
                       }}
                       transition={{
-                        duration: 0.38,
-                        ease: [0.22, 1, 0.36, 1],
+                        type:
+                          "spring",
+                        stiffness:
+                          260,
+                        damping: 20,
                       }}
-                      className="overflow-hidden"
+                      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border text-muted-foreground sm:h-9 sm:w-9"
                     >
+                      <ChevronDown className="h-4 w-4" />
+                    </motion.div>
+                  </button>
+
+                  <AnimatePresence
+                    initial={false}
+                  >
+                    {isOpen && (
                       <motion.div
                         initial={{
-                          y: -8,
+                          height: 0,
+                          opacity: 0,
                         }}
                         animate={{
-                          y: 0,
+                          height:
+                            "auto",
+                          opacity: 1,
+                        }}
+                        exit={{
+                          height: 0,
+                          opacity: 0,
                         }}
                         transition={{
-                          duration: 0.35,
+                          duration:
+                            0.35,
+                          ease: [
+                            0.22,
+                            1,
+                            0.36,
+                            1,
+                          ],
                         }}
-                        className="pb-8 pl-0 sm:pl-[60px]"
+                        className="overflow-hidden"
                       >
-                        {item.key ===
-                          "stack" && (
-                          <div className="flex flex-wrap gap-2">
-                            {project.techStack.map(
-                              (
-                                technology,
-                                technologyIndex,
-                              ) => (
-                                <motion.span
-                                  key={
-                                    technology
-                                  }
-                                  initial={
-                                    shouldReduceMotion
-                                      ? false
-                                      : {
-                                          opacity: 0,
-                                          y: 7,
-                                        }
-                                  }
-                                  animate={{
-                                    opacity: 1,
-                                    y: 0,
-                                  }}
-                                  transition={{
-                                    delay:
-                                      technologyIndex *
-                                      0.035,
-                                  }}
-                                  whileHover={
-                                    shouldReduceMotion
-                                      ? undefined
-                                      : {
-                                          y: -2,
-                                        }
-                                  }
-                                  className="rounded-full border bg-card/60 px-3 py-2 text-xs text-muted-foreground transition-colors hover:border-brand/35 hover:text-foreground"
-                                >
-                                  {technology}
-                                </motion.span>
-                              ),
-                            )}
-                          </div>
-                        )}
-
-                        {item.key ===
-                          "tools" && (
-                          <div className="space-y-6">
-                            {project.libraries.map(
-                              (
-                                library,
-                                libraryIndex,
-                              ) => (
-                                <motion.div
-                                  key={
-                                    library.name
-                                  }
-                                  initial={
-                                    shouldReduceMotion
-                                      ? false
-                                      : {
-                                          opacity: 0,
-                                          x: -10,
-                                        }
-                                  }
-                                  animate={{
-                                    opacity: 1,
-                                    x: 0,
-                                  }}
-                                  transition={{
-                                    delay:
-                                      libraryIndex *
-                                      0.05,
-                                  }}
-                                  className="grid gap-2 sm:grid-cols-[150px_minmax(0,1fr)] sm:gap-8"
-                                >
-                                  <p className="font-semibold">
+                        <div className="pb-7 sm:pl-[60px] sm:pb-8">
+                          {item.key ===
+                            "stack" && (
+                            <div className="flex flex-wrap gap-2">
+                              {project.techStack.map(
+                                (
+                                  technology,
+                                  technologyIndex,
+                                ) => (
+                                  <motion.span
+                                    key={
+                                      technology
+                                    }
+                                    initial={
+                                      shouldReduceMotion
+                                        ? false
+                                        : {
+                                            opacity: 0,
+                                            y: 6,
+                                          }
+                                    }
+                                    animate={{
+                                      opacity: 1,
+                                      y: 0,
+                                    }}
+                                    transition={{
+                                      delay:
+                                        technologyIndex *
+                                        0.03,
+                                    }}
+                                    className="rounded-full border bg-card/60 px-3 py-2 text-xs text-muted-foreground"
+                                  >
                                     {
+                                      technology
+                                    }
+                                  </motion.span>
+                                ),
+                              )}
+                            </div>
+                          )}
+
+                          {item.key ===
+                            "tools" && (
+                            <div className="space-y-5">
+                              {project.libraries.map(
+                                (
+                                  library,
+                                ) => (
+                                  <div
+                                    key={
                                       library.name
                                     }
-                                  </p>
-
-                                  <p className="max-w-2xl text-sm leading-7 text-muted-foreground">
-                                    {
-                                      library.description
-                                    }
-                                  </p>
-                                </motion.div>
-                              ),
-                            )}
-                          </div>
-                        )}
-
-                        {item.key ===
-                          "challenges" && (
-                          <div className="space-y-1">
-                            {project.challenges.map(
-                              (
-                                challenge,
-                                challengeIndex,
-                              ) => (
-                                <motion.div
-                                  key={
-                                    challenge
-                                  }
-                                  initial={
-                                    shouldReduceMotion
-                                      ? false
-                                      : {
-                                          opacity: 0,
-                                          x: -10,
-                                        }
-                                  }
-                                  animate={{
-                                    opacity: 1,
-                                    x: 0,
-                                  }}
-                                  transition={{
-                                    delay:
-                                      challengeIndex *
-                                      0.045,
-                                  }}
-                                  className="grid gap-3 border-b py-4 last:border-b-0 sm:grid-cols-[44px_minmax(0,1fr)]"
-                                >
-                                  <span className="font-mono text-[9px] text-brand">
-                                    {String(
-                                      challengeIndex +
-                                        1,
-                                    ).padStart(
-                                      2,
-                                      "0",
-                                    )}
-                                  </span>
-
-                                  <p className="max-w-2xl text-sm leading-7 text-muted-foreground">
-                                    {
-                                      challenge
-                                    }
-                                  </p>
-                                </motion.div>
-                              ),
-                            )}
-                          </div>
-                        )}
-
-                        {item.key ===
-                          "future" && (
-                          <div className="grid gap-12 lg:grid-cols-2">
-                            <div>
-                              <p className="mb-5 font-mono text-[9px] uppercase tracking-[0.16em] text-muted-foreground">
-                                Current limits
-                              </p>
-
-                              <div className="space-y-5">
-                                {project.limitations.map(
-                                  (
-                                    limitation,
-                                  ) => (
-                                    <p
-                                      key={
-                                        limitation
-                                      }
-                                      className="text-sm leading-7 text-muted-foreground"
-                                    >
+                                    className="grid gap-1.5 sm:grid-cols-[150px_minmax(0,1fr)] sm:gap-8"
+                                  >
+                                    <p className="text-sm font-semibold">
                                       {
-                                        limitation
+                                        library.name
                                       }
                                     </p>
-                                  ),
-                                )}
-                              </div>
-                            </div>
 
+                                    <p className="text-sm leading-6 text-muted-foreground sm:leading-7">
+                                      {
+                                        library.description
+                                      }
+                                    </p>
+                                  </div>
+                                ),
+                              )}
+                            </div>
+                          )}
+
+                          {item.key ===
+                            "challenges" && (
                             <div>
-                              <p className="mb-5 font-mono text-[9px] uppercase tracking-[0.16em] text-brand">
-                                Next iteration
-                              </p>
+                              {project.challenges.map(
+                                (
+                                  challenge,
+                                  challengeIndex,
+                                ) => (
+                                  <div
+                                    key={
+                                      challenge
+                                    }
+                                    className="grid grid-cols-[34px_minmax(0,1fr)] gap-3 border-b py-4 last:border-b-0 sm:grid-cols-[44px_minmax(0,1fr)]"
+                                  >
+                                    <span className="font-mono text-[9px] text-brand">
+                                      {String(
+                                        challengeIndex +
+                                          1,
+                                      ).padStart(
+                                        2,
+                                        "0",
+                                      )}
+                                    </span>
 
-                              <div className="space-y-5">
-                                {project.nextSteps.map(
-                                  (
-                                    step,
-                                    stepIndex,
-                                  ) => (
-                                    <motion.div
-                                      key={
-                                        step
+                                    <p className="text-sm leading-6 text-muted-foreground sm:leading-7">
+                                      {
+                                        challenge
                                       }
-                                      initial={
-                                        shouldReduceMotion
-                                          ? false
-                                          : {
-                                              opacity: 0,
-                                              x: 8,
-                                            }
-                                      }
-                                      animate={{
-                                        opacity: 1,
-                                        x: 0,
-                                      }}
-                                      transition={{
-                                        delay:
-                                          stepIndex *
-                                          0.04,
-                                      }}
-                                      className="flex gap-3"
-                                    >
-                                      <span className="mt-[10px] h-1.5 w-1.5 shrink-0 rounded-full bg-brand" />
+                                    </p>
+                                  </div>
+                                ),
+                              )}
+                            </div>
+                          )}
 
-                                      <p className="text-sm leading-7">
-                                        {step}
+                          {item.key ===
+                            "future" && (
+                            <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
+                              <div>
+                                <p className="mb-4 font-mono text-[9px] uppercase tracking-[0.16em] text-muted-foreground">
+                                  Current
+                                  limits
+                                </p>
+
+                                <div className="space-y-4">
+                                  {project.limitations.map(
+                                    (
+                                      limitation,
+                                    ) => (
+                                      <p
+                                        key={
+                                          limitation
+                                        }
+                                        className="text-sm leading-6 text-muted-foreground sm:leading-7"
+                                      >
+                                        {
+                                          limitation
+                                        }
                                       </p>
-                                    </motion.div>
-                                  ),
-                                )}
+                                    ),
+                                  )}
+                                </div>
+                              </div>
+
+                              <div>
+                                <p className="mb-4 font-mono text-[9px] uppercase tracking-[0.16em] text-brand">
+                                  Next
+                                  iteration
+                                </p>
+
+                                <div className="space-y-4">
+                                  {project.nextSteps.map(
+                                    (
+                                      step,
+                                    ) => (
+                                      <div
+                                        key={
+                                          step
+                                        }
+                                        className="flex gap-3"
+                                      >
+                                        <span className="mt-[9px] h-1.5 w-1.5 shrink-0 rounded-full bg-brand" />
+
+                                        <p className="text-sm leading-6 sm:leading-7">
+                                          {
+                                            step
+                                          }
+                                        </p>
+                                      </div>
+                                    ),
+                                  )}
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        )}
+                          )}
+                        </div>
                       </motion.div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            );
-          })}
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              );
+            },
+          )}
         </div>
       </motion.div>
     </section>
