@@ -33,10 +33,6 @@ export const metadata: Metadata = {
 
   description: siteDescription,
 
-  alternates: {
-    canonical: "/",
-  },
-
   keywords: [
     "Melvin Berkoh",
     "Software Engineer",
