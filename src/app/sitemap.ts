@@ -1,21 +1,28 @@
 import type { MetadataRoute } from "next";
 
+import { portfolioProjects } from "@/data/portfolio-projects";
 import { siteConfig } from "@/data/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = [
-    "",
-    "/projects/eligido-landing-page",
-    "/projects/coveytown-escape-room",
-    "/projects/nyc-aquatics-enrollment-prediction",
-  ];
-
-  return routes.map((route) => ({
-    url: `${siteConfig.url}${route}`,
+  const homepage: MetadataRoute.Sitemap[number] = {
+    url: siteConfig.url,
     lastModified: new Date(),
-    changeFrequency:
-      route === "" ? "weekly" : "monthly",
-    priority:
-      route === "" ? 1 : 0.8,
-  }));
+    changeFrequency: "weekly",
+    priority: 1,
+  };
+
+  const projectPages: MetadataRoute.Sitemap =
+    portfolioProjects.map((project) => ({
+      url: `${siteConfig.url}/projects/${project.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: project.featured
+        ? 0.9
+        : 0.8,
+    }));
+
+  return [
+    homepage,
+    ...projectPages,
+  ];
 }

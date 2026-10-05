@@ -7,9 +7,6 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: [
-        "/redesign-preview",
-      ],
     },
 
     sitemap: `${siteConfig.url}/sitemap.xml`,

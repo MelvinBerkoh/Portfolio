@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 import { AboutSection } from "@/components/home/redesign/about-section";
 import { AdditionalWorkSection } from "@/components/home/redesign/additional-work-section";
 import { ApplicationTrackerShowcase } from "@/components/home/redesign/application-tracker-showcase";
@@ -11,6 +13,17 @@ import { OpsDeskShowcase } from "@/components/home/redesign/opsdesk-showcase";
 import { PolicyScopeShowcase } from "@/components/home/redesign/policyscope-showcase";
 import { SiteHeader } from "@/components/home/redesign/site-header";
 import { SkillsSection } from "@/components/home/redesign/skills-section";
+import { siteConfig } from "@/data/site";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+
+  openGraph: {
+    url: siteConfig.url,
+  },
+};
 
 export default function Page() {
   return (
