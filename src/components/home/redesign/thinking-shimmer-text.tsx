@@ -18,6 +18,14 @@ type ThinkingShimmerTextProps = {
   duration?: number;
 };
 
+const baseTextStyle: CSSProperties = {
+  backgroundImage:
+    "linear-gradient(100deg, var(--foreground) 15%, var(--brand) 100%)",
+  backgroundClip: "text",
+  WebkitBackgroundClip: "text",
+  color: "transparent",
+};
+
 const shimmerStyle: CSSProperties = {
   backgroundImage:
     "linear-gradient(108deg, transparent 0%, transparent 34%, rgba(203, 213, 225, 0.08) 39%, rgba(226, 232, 240, 0.34) 44%, rgba(248, 250, 252, 0.82) 49%, rgba(255, 255, 255, 1) 50%, rgba(248, 250, 252, 0.82) 51%, rgba(226, 232, 240, 0.34) 56%, rgba(203, 213, 225, 0.08) 61%, transparent 66%, transparent 100%)",
@@ -50,14 +58,17 @@ export function ThinkingShimmerText({
       ref={textRef}
       className={`relative inline-block ${className}`}
     >
-      <span className="relative z-10">
+      <span
+        className="relative z-10"
+        style={baseTextStyle}
+      >
         {children}
       </span>
 
       {!shouldReduceMotion && (
         <motion.span
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-20"
+          className="pointer-events-none absolute inset-0 z-20 hidden sm:block"
           style={shimmerStyle}
           initial={false}
           animate={
